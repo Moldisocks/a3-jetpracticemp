@@ -1,9 +1,15 @@
 /*
-	Last Modified:  Mon Jun 04 23:28:52 2018
+	Author: Moldisocks
+	Last Modified: 2019.02.07 22.20
+	Email: moldisocks78@gmail.com
+
+	Notes:
+
+	Description:
+
+	To Do:
+
 */
-///////////////////////////////////////////////////////////////////////////
-/// Styles
-///////////////////////////////////////////////////////////////////////////
 
 // Control types
 #define CT_STATIC           0
@@ -471,30 +477,30 @@ class RscMapControl
 	};
 };
 
-class RscControlsgroup  
+class RscControlsgroup
     {
     	type = CT_CONTROLS_GROUP;
     	idc = -1;
     	style = ST_MULTI;
     	x = (safeZoneX + (SafezoneW * 0.0163));  // scalability code which resizes correctly no matter what gui size or screen dimensions is used
-    	y = (safeZoneY + (SafezoneH * 0.132));   
-    	w = (SafezoneW  * 0.31);                 
-    	h = (SafezoneH  * 0.752);              
+    	y = (safeZoneY + (SafezoneH * 0.132));
+    	w = (SafezoneW  * 0.31);
+    	h = (SafezoneH  * 0.752);
 
-    	class VScrollbar 
+    	class VScrollbar
     	{
     		color[] = {0.5, 0.5, 0.5, 1};
     		width = 0.015;
     		autoScrollSpeed = -1;
     		autoScrollDelay = 0;
     		autoScrollRewind = 0;
-	     arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow 
-	     arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on 
-	     border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically) 
-	     thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa"; // Dragging element (stretched vertically) 
+	     arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow
+	     arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on
+	     border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically)
+	     thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa"; // Dragging element (stretched vertically)
     	};
 
-    	class HScrollbar 
+    	class HScrollbar
     	{
     		color[] = {1, 1, 1, 1};
     		height = 0.028;
@@ -505,10 +511,10 @@ class RscControlsgroup
     		color[] = {1,1,1,0.6};
     		colorActive[] = {1,1,1,1};
     		colorDisabled[] = {1,1,1,0.3};
-	     arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow 
-	     arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on 
-	     border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically) 
-	     thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa"; // Dragging element (stretched vertically) 
+	     arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow
+	     arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on
+	     border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically)
+	     thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa"; // Dragging element (stretched vertically)
     	};
 
     	class Controls {};
@@ -523,36 +529,36 @@ class RscListNBox
 /*
 ** standard stuff
 */
- type = CT_LISTNBOX;// 102; 
+ type = CT_LISTNBOX;// 102;
  style =ST_MULTI;
- w = 0.4;   h = 0.4; 
- font = "TahomaB"; 
- sizeEx = 0.04; 
- colorText[] = {0.8784, 0.8471, 0.651, 1}; 
- colorBackground[] = {0, 0, 0, 1}; 
+ w = 0.4;   h = 0.4;
+ font = "TahomaB";
+ sizeEx = 0.04;
+ colorText[] = {0.8784, 0.8471, 0.651, 1};
+ colorBackground[] = {0, 0, 0, 1};
 /*
 ** type specific
 */
- autoScrollSpeed = -1; 
- autoScrollDelay = 5; 
- autoScrollRewind = 0; 
- arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)"; 
- arrowFull = "#(argb,8,8,3)color(1,1,1,1)"; 
- columns[] = {0.3, 0.6, 0.7}; 
- color[] = {1, 1, 1, 1}; 
- colorScrollbar[] = {0.95, 0.95, 0.95, 1}; 
- colorSelect[] = {0.95, 0.95, 0.95, 1}; 
- colorSelect2[] = {0.95, 0.95, 0.95, 1}; 
- colorSelectBackground[] = {0, 0, 0, 1}; 
- colorSelectBackground2[] = {0.8784, 0.8471, 0.651, 1}; 
- drawSideArrows = 0; 
- idcLeft = -1; 
- idcRight = -1; 
- maxHistoryDelay = 1; 
- rowHeight = 0; 
- soundSelect[] = {"", 0.1, 1}; 
- period = 1; 
- shadow = 2; 
+ autoScrollSpeed = -1;
+ autoScrollDelay = 5;
+ autoScrollRewind = 0;
+ arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";
+ arrowFull = "#(argb,8,8,3)color(1,1,1,1)";
+ columns[] = {0.3, 0.6, 0.7};
+ color[] = {1, 1, 1, 1};
+ colorScrollbar[] = {0.95, 0.95, 0.95, 1};
+ colorSelect[] = {0.95, 0.95, 0.95, 1};
+ colorSelect2[] = {0.95, 0.95, 0.95, 1};
+ colorSelectBackground[] = {0, 0, 0, 1};
+ colorSelectBackground2[] = {0.8784, 0.8471, 0.651, 1};
+ drawSideArrows = 0;
+ idcLeft = -1;
+ idcRight = -1;
+ maxHistoryDelay = 1;
+ rowHeight = 0;
+ soundSelect[] = {"", 0.1, 1};
+ period = 1;
+ shadow = 2;
  class ScrollBar
  {
   arrowEmpty = "#(argb,8,8,3)color(1,1,1,1)";

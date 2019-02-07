@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified: 2019.02.07 21.29
+	Last Modified: 2019.02.07 22.15
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -16,9 +16,11 @@ onLoadName ="JetPracticeMP";
 onLoadMission = "Multiplayer Jet Practice";
 
 class cfgFunctions {
-
+	#include "functions\functions.hpp"
 };
 
+#include "resouces\gui_defines.hpp"
+#include "resouces\dialogs.hpp"
 class RscTitles {
-
+	#include "resouces\titles.hpp"
 };
