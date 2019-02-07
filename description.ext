@@ -1,0 +1,24 @@
+/*
+	Author: Moldisocks
+	Last Modified: 2019.02.07 21.29
+	Email: moldisocks78@gmail.com
+
+	Notes:
+
+	Description:
+
+	To Do:
+
+*/
+
+author = "Moldisocks";
+onLoadName ="JetPracticeMP";
+onLoadMission = "Multiplayer Jet Practice";
+
+class cfgFunctions {
+
+};
+
+class RscTitles {
+
+};

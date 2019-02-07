@@ -1,0 +1,70 @@
+Current AF3 version: v0.04 (Last Modified: 2019.01.26 12.42)
+Authors: Moldisocks (Scripter) and Lojkkus (Level designer)
+AF3 Map/Gamemode: Athira | Small-Conquest
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Things To do:
+	- Fix: Progression system adds money while in capture point only based on whether capturing happens in a teams direction. Meaning that a player can get unlimited money if they begin capturing, then leave, then reenter over and over again.
+	- Improve: Jump error checkiung, also need to improve movement fluidity by artifically moving the player forward when they hit the ground.
+	- Fix: Bug with left/right button clicking to select loadout where the weaponselectloadoutarray doesn't correctly adjust upon openning the menu.
+	- Improve: Re-do the stats HUD on right.
+	- Fix: Bug in customisation menu where player will move to two different customisation positions.
+	- Improve: Customisation menu spawn equiping locations should be different between csat and nato.
+	- Improve: Add more contents to help menu.
+	- Add: Squad system and menu.
+	- Improve: Update the pictures for each kit, make them look better.
+	- Add: Flag highlighting on spawn menu when selecting a certain spawn point.
+	- Improve: spawn menu listbox, change so it will automatically go back to last selected spawn point.
+	- Improve: Generally improve all menus, including font, tooltips, usabilitiy and colouring.
+	- Improve: Positioning of progression balance and xp ctrls on spawn menu.
+	- Add: help menu to player menu
+	- Improve: Optimise menu performance
+	- Add: Shovel to build barracades
+	- Fix: Shopping and kit systems to include not only native kit, but also kits included. ****CRITICAL****
+	- Add: Extensive player settings system, such that they can fully customise their game.
+	- add: player bounds
+	- Check: If exists, Bug on C where you get twice the money.
+	- Fix: Multiple vehicles spawn on points if two teams capture a point.
+	- Add: Auto saving function, to save the profilenamespace to file periodically.
+	- Add: Bring to front, push to back functionality with HUD editor.
+	- Fix: ESC menu exiting when coming from editkeys menu to spawn menu then pressing ESC.
+	- Fix: Captured point 3D marker colours don't persist between JIP sessions
+	- Fix: Some array selection bugs within the kit/loadout selection menu.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Changelog
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AF3 v0.01:
+	- Added: Experience points and money based progression system. All loadout items, clothing and special vehicles can be purchased, but only after the required XP has been obtained.
+	- Added: Spawning system, using a menu that allows the player to select, modify and spawn with a kit containing a selection of items including a weapon and gadget.
+	- Added: Edit key binding system, allowing a player to rebind mission specific functions/actions.
+	- Added: Capture point system. It controls how flags are captured, how many points a player gets for each capture and the amount of ticket drain.
+	- Added: Ear plugs.
+	- Added: Shopping menu to be used by the shopping system.
+AF3 v0.02:
+	- Added: XP and Balance system and initialisation process.
+	- Added: Integrated XP and money into shop.
+	- Added: Began integration of XP and money into capturing points.
+	- Fixed: Bug fix for edit keys menu, where shift key press would like and unbind` un-intentionally.
+	- Added: Left and right buttons for spawn menu weapons. Easier way to edit loadout without having to go into customisation menu.
+	- Fixed: Bug in spawn menu where if auto-deploying and player pressed ESC, player would spawn twice.
+	- Fixed: Help menu listbox bug.
+	- Fixed: Multiple opening of player menu.
+	- Added: msgbox function for general messaging to player.
+	- Changed: Progression Stats Hud is now display all the time (needs to be revised).
+	- Added: HUD positioning tool, so players can customise the position of their own HUD elements.
+AF3 V0.03:
+	- Fixed: All visual bugs within the shopping menu
+	- Improved: HUD Positioning tool performance wise.
+	- Added: Restore to defaults button on edit keys menu.
+	- Fixed: Bug with loadout selection on spawn menu instead of customisation menu.
+	- Improved: Complete refactor of shopping system to align with new requirements.
+	- Added: Attachments to shop and v1 of weapon customisation
+	- Added: Gadgets to shop and allowed for selection of gadget and application to kit.
+AF3 V0.04
+	- Added: Respawn Beacon
+	- Added: Gadget placement, used for all placable gadgets in the future
+	- Added: First version of player settings system, with menu and backend supprort. (Still needs work.)
