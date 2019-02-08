@@ -1,0 +1,36 @@
+Mission: JetPracticeMP
+Description: A multiplayer sandbox mission that allows players to easily practice their jetting gameplay.
+
+Current verison: v1.0
+Last Modified: 2019.02.09 04.20
+
+Author: Moldisocks
+Email: moldisocks78@gmail.com
+
+
+
+Features:
+	- Modified VVS (credit to Tonic  Link:http://www.armaholic.com/forums.php?m=posts&q=24727)
+	- Jetspawner
+	- Enemy AI spawner
+	- HUD customisation system
+	- Mission keybinding system
+	- Jumping
+
+Future features:
+	- Teleport system
+	- Jet matchmaking system
+	- Jet loadout system
+	- Points system
+	- Repair functions
+	- Enemy jet spawner.
+	- Modifcation to VVS to allow play to select a position on map to spawn vehicle on.
+
+
+Version 1.0:
+	- Added: Jet spawner
+	- Added: Enemy AI Spawner
+	- Added: HUD customisation system
+	- Added: Keybinding system
+	- Added: Movement mechanics
+	- Improved: All code base and GUIs

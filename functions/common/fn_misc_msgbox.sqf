@@ -15,6 +15,7 @@ params["_msg","_question"];
 
 misc_buttonPressed = false;
 misc_msgboxresult = false;
+misc_proper_close = false;
 if (isNil "_question") then {
 	_question = false;
 };
@@ -35,11 +36,13 @@ if (_question) then {
 	((findDisplay 12534) displayCtrl 2200) ctrlEnable false;
 	((findDisplay 12534) displayCtrl 1600) ctrlAddEventHandler ["MouseButtonClick",{
 		misc_buttonPressed = true;
+		misc_proper_close = true;
 		misc_msgboxresult = true;
 		closeDialog 12534;
 	}];
 	((findDisplay 12534) displayCtrl 1601) ctrlAddEventHandler ["MouseButtonClick",{
 		misc_buttonPressed = true;
+		misc_proper_close = true;
 		misc_msgboxresult = false;
 		closeDialog 12534;
 	}];
@@ -54,3 +57,10 @@ if (_question) then {
 	((findDisplay 12534) displayCtrl 1100) ctrlEnable false;
 	((findDisplay 12534) displayCtrl 2200) ctrlEnable false;
 };
+
+(findDisplay 12534) displayAddEventHandler ["Unload",{
+	if (!misc_proper_close) then {
+		misc_buttonPressed = true;
+		misc_msgboxresult = false;
+	};
+}];

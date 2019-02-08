@@ -21,7 +21,7 @@ ep_switch = false;
 jump_zVel = 4;
 
 ///COMMENT OUT NEXT LINE IF YOU WANT PLAYER DATA TO PERSIST.
-["purge",true] spawn mld_dbug_fnc_pdata_purgePlayer;
+//["purge",true] spawn mld_dbug_fnc_pdata_purgePlayer;
 
 onPreloadFinished {
 	if (misc_loading) then {
