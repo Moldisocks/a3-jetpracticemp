@@ -13,7 +13,7 @@
 _exitwith_follow_through = false;
 
 if (isNull (findDisplay 895)) exitWith {["Display couldn't be found",__FILE__,1] call mld_dbug_fnc_log_add;};
-
+if ((lbCurSel 1500) == -1) exitWith {["You need to select a jet before clicking spawn",__FILE__,3,true] call mld_dbug_fnc_log_add;};
 
 _marker_air_min = "";
 _marker_air_max = "";
@@ -142,9 +142,9 @@ if (_spawn_on_ground) then {
 			} forEach _nearbyObjects;
 			_nearbyObjects = nearestObjects [_pos,["Plane","Car","Tank"],_spawn_detection_radius];
 			if (count _nearbyObjects > 0) then {
-				["<br /><br />There could be vehicles blocking the spawn pad, would you like to spawn anyway?",true] call mld_fnc_misc_msgbox;
+				["<br /><br />There could be vehicles blocking the spawn pad, would you like to spawn anyway?",true] call mld_core_fnc_misc_msgbox;
 				waitUntil {misc_buttonPressed};
-				if (!misc_buttonPressed) exitWith {["Vehicles could be blocking spawnpad, user choose not to spawn",__FILE__,1] call mld_dbug_fnc_log_add; _exitwith_follow_through=true;};
+				if (!misc_msgboxresult) exitWith {["Vehicles could be blocking spawnpad, user choose not to spawn",__FILE__,1] call mld_dbug_fnc_log_add; _exitwith_follow_through=true;};
 			};
 		};
 	};

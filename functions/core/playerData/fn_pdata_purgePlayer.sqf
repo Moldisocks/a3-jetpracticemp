@@ -53,7 +53,7 @@ switch (_purgeItem) do
 	{
 		["Purged pmenu_vDistance",__FILE__,2] call mld_dbug_fnc_log_add;
 		profileNamespace setVariable ["pmenu_vDistance",pmenu_vDistance];
-	}
+	};
 	default
 	{
 		//profileNamespace setVariable ["",nil];
@@ -62,7 +62,7 @@ switch (_purgeItem) do
 		profileNamespace setVariable ["newPlayer",nil];
 	  	//profileNamespace setVariable ["prog_XP",nil];
 	  	//profileNamespace setVariable ["prog_Balance",nil];
-	  	//profileNamespace setVariable ["hedit_displayPositions",nil];
+	  	profileNamespace setVariable ["hedit_displayPositions",nil];
 	  	profileNamespace setVariable ["pmenu_vDistance",nil];
 	};
 };

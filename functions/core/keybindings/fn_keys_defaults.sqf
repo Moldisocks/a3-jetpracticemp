@@ -17,12 +17,12 @@ if (_spawnedFromMenu) then {
 	waitUntil {misc_buttonPressed};
 	if (misc_msgboxresult) then {
 		closeDialog 9885;
-		keys_bindings = [59,57,41,60];
+		keys_bindings = [59,57,41,60,61];
 		profileNamespace setVariable ["keys_bindings",keys_bindings];
 		["keybindings set to default",__FILE__,2] call mld_dbug_fnc_log_add;
 	};
 } else {
-	keys_bindings = [59,57,41,60];
+	keys_bindings = [59,57,41,60,61];
 	profileNamespace setVariable ["keys_bindings",keys_bindings];
 		["keybindings set to default",__FILE__,2] call mld_dbug_fnc_log_add;
 

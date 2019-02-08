@@ -118,7 +118,7 @@ class mld_dbug {
 		class log_setLevel{};
 		class log_settings{};
 		class log_resolve{};
-	}
+	};
 };
 
 //For VVS

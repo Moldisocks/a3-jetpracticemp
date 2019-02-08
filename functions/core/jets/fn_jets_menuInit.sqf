@@ -18,3 +18,4 @@ waitUntil {!isNull (findDisplay 895);};
 
 
 {((findDisplay 895) displayCtrl 1500) lbAdd (getText (configFile >> "CfgVehicles" >> _x >> "DisplayName"));} forEach jets_classnames;
+lbSetCurSel [1500,0];

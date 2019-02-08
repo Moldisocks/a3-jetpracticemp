@@ -12,15 +12,20 @@
 */
 
 _returnString = "";
+
 switch (_this select 0) do
 {
 	case 0:
 	{
-		_returnString = "[disabled]";
+		_returnString = "[LOG_DISABLED]";
 	};
 	case 1:
 	{
 		_returnString = "[DEBUG]";
+	};
+	case 2:
+	{
+		_returnString = "[USER]";
 	};
 	case 3:
 	{
@@ -36,7 +41,7 @@ switch (_this select 0) do
 	};
 	default
 	{
-		_returnString = "[unknown]";
+		_returnString = "[UNKNOWN]";
 	};
 };
 

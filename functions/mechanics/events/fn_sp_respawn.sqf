@@ -11,3 +11,5 @@
 
 */
 
+misc_godmodeOn = false;
+jump_zVel = 4;

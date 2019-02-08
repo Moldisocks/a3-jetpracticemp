@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2018.12.11 01.21
+	Last Modified:  2019.02.09 02.35
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -15,26 +15,25 @@ class playerMenu {
 	idd = 23323;
 	movingEnable =false;
 	class controls {
-		class mainBackground: IGUIBack
+			class mainBack: IGUIBack
 		{
 			idc = 2200;
-
-			x = 0.402031 * safezoneW + safezoneX;
-			y = 0.28638 * safezoneH + safezoneY;
-			w = 0.180469 * safezoneW;
-			h = 0.176 * safezoneH;
-			colorBackground[] = {0,0,0,0.6};
+			x = 0.432948 * safezoneW + safezoneX;
+			y = 0.335 * safezoneH + safezoneY;
+			w = 0.139261 * safezoneW;
+			h = 0.099 * safezoneH;
+			colorBackground[] = {0,0,0,0.4};
 		};
 		class keyBindingsBtn: RscButton
 		{
 			idc = 1602;
-			action = "menus_changing = true; [] spawn mld_core_fnc_keys_menu";
+			action = "[] spawn mld_core_fnc_keys_menu";
 
 			text = "Key Bindings"; //--- ToDo: Localize;
-			x = 0.402031 * safezoneW + safezoneX;
-			y = 0.467 * safezoneH + safezoneY;
-			w = 0.0721875 * safezoneW;
-			h = 0.033 * safezoneH;
+			x = 0.432948 * safezoneW + safezoneX;
+			y = 0.4395 * safezoneH + safezoneY;
+			w = 0.0696581 * safezoneW;
+			h = 0.0247779 * safezoneH;
 		};
 		class editHudBtn: RscButton
 		{
@@ -42,68 +41,72 @@ class playerMenu {
 			action = "[] call mld_core_fnc_hedit_menuInit;";
 
 			text = "Edit HUD"; //--- ToDo: Localize;
-			x = 0.474734 * safezoneW + safezoneX;
-			y = 0.467 * safezoneH + safezoneY;
-			w = 0.0360937 * safezoneW;
-			h = 0.033 * safezoneH;
+			x = 0.502785 * safezoneW + safezoneX;
+			y = 0.44016 * safezoneH + safezoneY;
+			w = 0.0694546 * safezoneW;
+			h = 0.0246666 * safezoneH;
 		};
 		class topBar: RscStructuredText
 		{
 			idc = 1100;
 
-			text = "<t> Player Menu </t>"; //--- ToDo: Localize;
-			x = 0.402031 * safezoneW + safezoneX;
-			y = 0.2525 * safezoneH + safezoneY;
-			w = 0.180469 * safezoneW;
-			h = 0.033 * safezoneH;
+			text = "<t size='0.9' align='center'> Player Menu </t>"; //--- ToDo: Localize;
+			x = 0.432948 * safezoneW + safezoneX;
+			y = 0.313 * safezoneH + safezoneY;
+			w = 0.139261 * safezoneW;
+			h = 0.022 * safezoneH;
 			colorBackground[] = COLOR_JETGREEN;
 		};
 		class bottomBar: IGUIBack
 		{
 			idc = 2201;
 
-			x = 0.402031 * safezoneW + safezoneX;
-			y = 0.46194 * safezoneH + safezoneY;
-			w = 0.180469 * safezoneW;
+			x = 0.432948 * safezoneW + safezoneX;
+			y = 0.434 * safezoneH + safezoneY;
+			w = 0.139261 * safezoneW;
 			h = 0.0055 * safezoneH;
 			colorBackground[] = COLOR_JETGREEN;
 		};
-		class settingsBtn: RscButton
+		class leftVDistance: RscButton
 		{
-			idc = 1600;
-			text = "Settings"; //--- ToDo: Localize;
-			x = 0.510312 * safezoneW + safezoneX;
-			y = 0.467 * safezoneH + safezoneY;
-			w = 0.0716667 * safezoneW;
+			idc = 1603;
+			text = "<"; //--- ToDo: Localize;
+			x = 0.463895 * safezoneW + safezoneX;
+			y = 0.368 * safezoneH + safezoneY;
+			w = 0.0103157 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = "menus_changing = true; [] call mld_core_fnc_pdata_menuInit;";
+			action = ["left"] spawn mld_core_fnc_pmenu_viewDistance;
 		};
-		class sqaudText: RscStructuredText
+		class rightVDistance: RscButton
+		{
+			idc = 1604;
+			text = ">"; //--- ToDo: Localize;
+			x = 0.530947 * safezoneW + safezoneX;
+			y = 0.368 * safezoneH + safezoneY;
+			w = 0.0103157 * safezoneW;
+			h = 0.033 * safezoneH;
+			action = ["right"] spawn mld_core_fnc_pmenu_viewDistance;
+		};
+		class vDistanceText: RscStructuredText
 		{
 			idc = 1101;
-			x = 0.412344 * safezoneW + safezoneX;
-			y = 0.302 * safezoneH + safezoneY;
-			w = 0.0670312 * safezoneW;
-			h = 0.022 * safezoneH;
+			text = "";
+			x = 0.476763 * safezoneW + safezoneX;
+			y = 0.371593 * safezoneH + safezoneY;
+			w = 0.0521544 * safezoneW;
+			h = 0.0257037 * safezoneH;
 			colorBackground[] = {0,0,0,0};
-			tooltip = "Click to edit open squad menu"; //--- ToDo: Localize;
 		};
-		class squadMatesList: RscStructuredText
+		class viewDTitle: RscStructuredText
 		{
 			idc = 1102;
-			x = 0.412344 * safezoneW + safezoneX;
-			y = 0.335 * safezoneH + safezoneY;
-			w = 0.159844 * safezoneW;
-			h = 0.11 * safezoneH;
+			text = "<t size='0.85' align='center'> View Distance </t>"; //--- ToDo: Localize;
+			x = 0.46598 * safezoneW + safezoneX;
+			y = 0.344148 * safezoneH + safezoneY;
+			w = 0.0727309 * safezoneW;
+			h = 0.0210741 * safezoneH;
+			colorBackground[] = {0,0,0,0};
 		};
-		class changeTeamBtn: RscButton
-		{
-			idc = 1601;
-			text = "Change Team"; //--- ToDo: Localize;
-			x = 0.515469 * safezoneW + safezoneX;
-			y = 0.302 * safezoneH + safezoneY;
-			w = 0.0567187 * safezoneW;
-			h = 0.022 * safezoneH;
-		};
+
 	};
 };

@@ -62,7 +62,7 @@ _setDefaults = {
 };
 
 if (_spawnedFromMenu) then {
-	["<br /><br />This will reset the positions of all HUD elements. Are you sure you want to proceed?",true] call mld_fnc_misc_msgbox;
+	["<br /><br />This will reset the positions of all HUD elements. Are you sure you want to proceed?",true] call mld_core_fnc_misc_msgbox;
 	waitUntil {misc_buttonPressed};
 	if (misc_msgboxresult) then {
 		[_spawnedFromMenu] spawn _setDefaults;

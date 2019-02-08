@@ -11,7 +11,9 @@
 
 */
 
+if (menus_open) exitWith {["Menu already open",__FILE__,3] call mld_dbug_fnc_log_add;};
 createDialog"spawnAIMenu";
+menus_open = true;
 eai_marker_num = 1;
 eai_marker_array = [];
 eai_placed_vehs = [];
@@ -30,95 +32,88 @@ waitUntil {!isNull (findDisplay 56242)};
 //(1) to fix
 //====================================DECLAR INLINE FUNCTIONS=============================//
 
-if (isNil "mld_fnc_unloadAIMenu") {
-	mld_fnc_unloadAIMenu = { //function to run on unload to delete all markers
-		placeEH = nil;
-		{if (!isNil "_x") then {
-			deleteMarkerLocal _x;
-			_x = nil
-			};} forEach eai_marker_array;
+mld_fnc_unloadAIMenu = { //function to run on unload to delete all markers
+	placeEH = nil;
+	{if (!isNil "_x") then {
+		deleteMarkerLocal _x;
+		_x = nil
+		};} forEach eai_marker_array;
+};
+
+
+mld_fnc_undo = { //function to run when user wants to undo placement of marker
+	_arrayCt1 = count eai_marker_array;
+	if (_arrayCt1 > 0) then {
+	_lastMarker = eai_marker_array deleteAt (_arrayCt1 - 1);
+	_lastVeh = eai_placed_vehs deleteAt ((count eai_placed_vehs) - 1);
+	eai_undo_vehs pushBack _lastVeh;
+	eai_undo_markers pushBack [_lastMarker,(getMarkerPos _lastMarker)];
+	deleteMarkerLocal _lastMarker;
+	eai_marker_num = eai_marker_num -1;
 	};
 };
 
-if (isNil "mld_fnc_undo") {
-	mld_fnc_undo = { //function to run when user wants to undo placement of marker
-		_arrayCt1 = count eai_marker_array;
-		if (_arrayCt1 > 0) then {
-		_lastMarker = eai_marker_array deleteAt (_arrayCt1 - 1);
-		_lastVeh = eai_placed_vehs deleteAt ((count eai_placed_vehs) - 1);
-		eai_undo_vehs pushBack _lastVeh;
-		eai_undo_markers pushBack [_lastMarker,(getMarkerPos _lastMarker)];
-		deleteMarkerLocal _lastMarker;
-		eai_marker_num = eai_marker_num -1;
-		};
-	};
-};
-
-if (isNil "mld_fnc_redo") {
-	mld_fnc_redo = { //function to be run when user wants to redo the placements they have undone.
-		_arrayCt = count eai_undo_markers;
-		if (_arrayCt > 0) then {
-			_markerName = (eai_undo_markers select (_arrayCt - 1)) select 0;
-			_markerPos = (eai_undo_markers select (_arrayCt - 1)) select 1;
-			_veh = eai_undo_vehs deleteAt ((count eai_undo_vehs) - 1);
-			eai_undo_markers deleteAt (_arrayCt -1);
-			_AImarker = createMarkerLocal [format ["placementMarker%1",eai_marker_num],_markerPos];
-			eai_placed_vehs pushBack _veh;
-	 		eai_marker_array pushBack _AImarker;
-			_AImarker setMarkerShapeLocal "ICON";
-			_AImarker setMarkerTypeLocal "hd_dot";
-			_AImarker setMarkerColorLocal "ColorIndependent";
-			_AImarker setMarkerTextLocal (format ["Vehicle %1",eai_marker_num]);
-			eai_marker_num = eai_marker_num + 1;
-		};
-	};
-};
-
-if (isNil "mld_fnc_goToMe") {
-	mld_fnc_goToMe = {
-		((findDisplay 56242) displayCtrl 1201) ctrlMapAnimAdd [0, 0.01,(getPos player)];// Update map ctrl
-		ctrlMapAnimCommit ((findDisplay 56242) displayCtrl 1201);
-	};
-};
-
-if (isNil "mld_fnc_placeMarker") {
-	mld_fnc_placeMarker = { //function to run when user doubleclicks on map ctrl
-		if ((count eai_undo_markers) > 0) then {
-			eai_undo_markers = [];
-		};
-		if ((count eai_undo_vehs) > 0) then {
-			eai_undo_vehs = [];
-		};
-		if (Count eai_marker_array > 14) then {
-			hintSilent "You can't place more than 15 vehicles at a time";
-			} else {
-
-		_AImarker = createMarkerLocal [(format ["placementMarker%1",eai_marker_num]),(_this select 0)];
-		eai_marker_array pushBack _AImarker;
+mld_fnc_redo = { //function to be run when user wants to redo the placements they have undone.
+	_arrayCt = count eai_undo_markers;
+	if (_arrayCt > 0) then {
+		_markerName = (eai_undo_markers select (_arrayCt - 1)) select 0;
+		_markerPos = (eai_undo_markers select (_arrayCt - 1)) select 1;
+		_veh = eai_undo_vehs deleteAt ((count eai_undo_vehs) - 1);
+		eai_undo_markers deleteAt (_arrayCt -1);
+		_AImarker = createMarkerLocal [format ["placementMarker%1",eai_marker_num],_markerPos];
+		eai_placed_vehs pushBack _veh;
+ 		eai_marker_array pushBack _AImarker;
 		_AImarker setMarkerShapeLocal "ICON";
 		_AImarker setMarkerTypeLocal "hd_dot";
 		_AImarker setMarkerColorLocal "ColorIndependent";
 		_AImarker setMarkerTextLocal (format ["Vehicle %1",eai_marker_num]);
-		_lbSel = lbCurSel 1500;
-		_lbSelName = eai_vehicles select _lbSel;
-		eai_placed_vehs pushBack _lbSelName;
-			eai_marker_num = eai_marker_num + 1;
-		sleep 2;
-		hint "";
-		};
+		eai_marker_num = eai_marker_num + 1;
 	};
 };
 
-if (isNil "mld_fnc_deleteAIMarkers") {
-	mld_fnc_deleteAIMarkers = {// fucntion to run when deleting all markers
-		{
-			deleteMarkerLocal _x;
-		} forEach eai_marker_array;
-		eai_marker_array = [];
-		eai_placed_vehs = [];
-		eai_marker_num = 1;
+
+mld_fnc_goToMe = {
+	((findDisplay 56242) displayCtrl 1201) ctrlMapAnimAdd [0, 0.01,(getPos player)];// Update map ctrl
+	ctrlMapAnimCommit ((findDisplay 56242) displayCtrl 1201);
+};
+
+
+mld_fnc_placeMarker = { //function to run when user doubleclicks on map ctrl
+	if ((count eai_undo_markers) > 0) then {
+		eai_undo_markers = [];
 	};
-];
+	if ((count eai_undo_vehs) > 0) then {
+		eai_undo_vehs = [];
+	};
+	if (Count eai_marker_array > 14) then {
+		hintSilent "You can't place more than 15 vehicles at a time";
+		} else {
+
+	_AImarker = createMarkerLocal [(format ["placementMarker%1",eai_marker_num]),(_this select 0)];
+	eai_marker_array pushBack _AImarker;
+	_AImarker setMarkerShapeLocal "ICON";
+	_AImarker setMarkerTypeLocal "hd_dot";
+	_AImarker setMarkerColorLocal "ColorIndependent";
+	_AImarker setMarkerTextLocal (format ["Vehicle %1",eai_marker_num]);
+	_lbSel = lbCurSel 1500;
+	_lbSelName = eai_vehicles select _lbSel;
+	eai_placed_vehs pushBack _lbSelName;
+		eai_marker_num = eai_marker_num + 1;
+	sleep 2;
+	hint "";
+	};
+};
+
+
+mld_fnc_deleteAIMarkers = {// fucntion to run when deleting all markers
+	{
+		deleteMarkerLocal _x;
+	} forEach eai_marker_array;
+	eai_marker_array = [];
+	eai_placed_vehs = [];
+	eai_marker_num = 1;
+};
+
 //====================================DECLAR INLINE FUNCTIONS=============================//
 
 
@@ -132,9 +127,7 @@ if (isNil "mld_fnc_deleteAIMarkers") {
 
 lbSetCurSel [1500,0];
 
-((findDisplay 56242) displayCtrl 1201) ctrlMapAnimAdd [0, 0.2, (getPos player)];// initialise map ctrl
-ctrlMapAnimCommit ((findDisplay 56242) displayCtrl 1201);
-
+call mld_fnc_goToMe;
 
 
 placeEH = ((findDisplay 56242) displayCtrl 1201) ctrlAddEventHandler ["MouseButtonDblClick",{ // Double click EH
@@ -148,4 +141,5 @@ placeEH = ((findDisplay 56242) displayCtrl 1201) ctrlAddEventHandler ["MouseButt
 
 unloadEH = (findDisplay 56242) displayAddEventHandler ["Unload",{ // EH triggers on menu unload
 	[] call mld_fnc_unloadAIMenu;
+	menus_open = false;
 }];

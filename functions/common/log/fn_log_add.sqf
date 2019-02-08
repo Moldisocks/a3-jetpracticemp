@@ -38,10 +38,16 @@ if (_doLog) then {
 		_log_level_str = [_log_level] call mld_dbug_fnc_log_resolve;
 
 		if (log_systemChat) then {
-			systemChat format ["%1 - File: %2 - %3",_log_level_str,_scope, _message];
+			if (_log_level == 2) then {
+				systemChat format ["%1", _message];
+			} else {
+				systemChat format ["%1 - File: %2 - %3",_log_level_str,_scope, _message];
+			};
 		};
 		if (log_diag_log) then {
 			diag_log format ["%1 - File: %2 - %3",_log_level_str,_scope, _message];
 		};
-		log_arr pushBack (format ["%1 - File: %2 - %3",_log_level_str,_scope, _message]);
+		if (_log_level != 0) then {
+			log_arr pushBack (format ["%1 - File: %2 - %3",_log_level_str,_scope, _message]);
+		};
 };
