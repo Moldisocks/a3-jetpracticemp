@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Sep 30 22:18:03 2018
+	Last Modified:  2019.02.08 19.00
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -13,7 +13,7 @@
 
 params ["_menu"];
 
-hMenu_helpElements = ["Quickstart Guide"];
+hmenu_helpElements = ["Quickstart Guide","Edit keybindings help","Spawn AI Menu"];
 
 
 //------------------Main function
@@ -24,19 +24,19 @@ if (isNull (findDisplay 7546)) then {
 
 	{
 		((findDisplay 7546) displayCtrl 1500) lbAdd _x;
-	} forEach hMenu_helpElements;
+	} forEach hmenu_helpElements;
 };
 
 if (!isNil '_menu') then {
-	_index = hMenu_helpElements find _menu;
+	_index = hmenu_helpElements find _menu;
 	if (_index == -1) then {
 		((findDisplay 7546) displayCtrl 1102) ctrlSetStructuredText parseText "<br/><t size='0.8'>Nothing has been writen for this help item yet. Coming soon...</t>";
 	} else {
 		lbSetCurSel [1500,_index];
-		[_index] call mld_fnc_hmenu_displayHelp;
+		[_index] call mld_core_fnc_hmenu_displayHelp;
 	};
 };
 
 ((findDisplay 7546) displayCtrl 1500) ctrlAddEventHandler ["LBselChanged", {
-	[_this select 1] call mld_fnc_hmenu_displayHelp;
+	[_this select 1] call mld_core_fnc_hmenu_displayHelp;
 }];

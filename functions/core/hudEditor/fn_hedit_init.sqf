@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Oct 14 15:40:53 2018
+	Last Modified:  2019.02.08 18.46
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -12,19 +12,17 @@
 */
 
 //Config
-hedit_displayNames = ["Progression HUD","Minimap HUD","Stats HUD","Earplug symbol"];
-hedit_displays = ["progStatsHud","miniMapHud","statsHud","earplugsSymbol"];
-hedit_layers = ["progHud","scoreHud","statsHudLayer","epMute"];
+hedit_displayNames = ["Progression HUD","Earplug symbol"];
+hedit_displays = ["progStatsHud","earplugsSymbol"];
+hedit_layers = ["progHud","epMute"];
 hedit_displayPositions = profileNamespace getVariable "hedit_displayPositions";
 hedit_hudInitFunctions = {
-	call mld_fnc_prog_hudInit;
-	call mld_fnc_mm_init;
-	call mld_fnc_hud_statsHud;
-	call ep_showSymbol; 
+	//call mld_core_fnc_prog_hudInit;
+	call ep_showSymbol;
 };
 //Declare vars
 hedit_disableEdit = false;
 
 if (isNil "hedit_displayPositions") then {
-	[false] call mld_fnc_hedit_defaults;
+	[false] call mld_core_fnc_hedit_defaults;
 };

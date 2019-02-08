@@ -1,9 +1,16 @@
-
 /*
-Author: Moldisocks
-Project: WarZoneMP
-Description: this function, provides a safezone area for the player. The safezone area is dependent upon which team the player is on. The areas are markers with area markers and the safezone volume is shapped like a sphere.
+	Author: Moldisocks
+	Last Modified: 2019.02.08 19.03
+	Email: moldisocks78@gmail.com
+
+	Notes:
+
+	Description: This function, provides a safezone area for the player. The safezone area is dependent upon which team the player is on. The areas are markers with area markers and the safezone volume is shapped like a sphere.
+
+	To Do:
+
 */
+
  slpCt = false;
  i = 0;
 if (isNil "EHid03") then {

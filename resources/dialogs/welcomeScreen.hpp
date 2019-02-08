@@ -23,7 +23,7 @@ class welcomeScreen { // Screen to
 			y = 0.462482 * safezoneH + safezoneY;
 			w = 0.180469 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class topBar: RscStructuredText
 		{
@@ -33,7 +33,7 @@ class welcomeScreen { // Screen to
 			y = 0.197444 * safezoneH + safezoneY;
 			w = 0.515104 * safezoneW;
 			h = 0.0275556 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class textOne: RscStructuredText
 		{
@@ -63,7 +63,7 @@ class welcomeScreen { // Screen to
 			y = 0.731 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = "closeDialog 4645; [] spawn mld_fnc_sp_respawn";
+			action = "closeDialog 4645; [] spawn mld_core_fnc_sp_respawn";
 			shortcuts[] = {"0x01"};
 		};
 		class bottomBar: IGUIBack
@@ -73,7 +73,7 @@ class welcomeScreen { // Screen to
 			y = 0.72 * safezoneH + safezoneY;
 			w = 0.515625 * safezoneW;
 			h = 0.0055 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class guideButton: RscButton
 		{
@@ -83,7 +83,7 @@ class welcomeScreen { // Screen to
 			y = 0.731 * safezoneH + safezoneY;
 			w = 0.0825 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = "['Quickstart Guide'] spawn mld_fnc_hmenu_menuInit";
+			action = "['Quickstart Guide'] spawn mld_core_fnc_hmenu_menuInit";
 		};
 	};
 };

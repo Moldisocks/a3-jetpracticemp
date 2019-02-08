@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Thu Jun 14 20:51:48 2018
+	Last Modified:  2019.02.08 18.53
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -22,17 +22,17 @@ waitUntil {// Get next key press
 	};
 };
 
-if (!keys_menuLoaded) exitWith {hint "Key binding cancelled"; diag_log "EXITWITH: File: fn_keys_getBinding.sqf  |  User cancelled keybinding";};
+if (!keys_menuLoaded) exitWith {["keybinding cancelled",__FILE__,2,true] call mld_dbug_fnc_log_add;};
 
 if ((keys_bindings find keys_currentKeyPressed) != -1) exitWith {//cancel if key is already bound
-	hint 'That key has already been mapped to another action';
+	["That key is already bound to another function",__FILE__,2,true] call mld_dbug_fnc_log_add;
 	((findDisplay 9885) displayCtrl 1101) ctrlSetStructuredText parseText '<t>Already Bound!</t>';
 	sleep 3;
-	['Nothing',(keys_bindings select (lbCurSel 1500))] call mld_fnc_keys_displayBinding;
+	['Nothing',(keys_bindings select (lbCurSel 1500))] call mld_core_fnc_keys_displayBinding;
 	hintSilent '';
 };
 
-['Nothing',keys_currentKeyPressed,false,false,false,true] call mld_fnc_keys_displayBinding;
+['Nothing',keys_currentKeyPressed,false,false,false,true] call mld_core_fnc_keys_displayBinding;
 _newKey = keys_currentKeyPressed;
 keys_currentKeyPressed = -1;
 waitUntil {//wait for confirmation
@@ -41,8 +41,8 @@ waitUntil {//wait for confirmation
 	};
 };
 
-if (!keys_menuLoaded) exitWith {hint "Key binding cancelled"; diag_log "EXITWITH: File: fn_keys_getBinding.sqf  |  User cancelled keybinding";};
+if (!keys_menuLoaded) exitWith {["keybinding cancelled",__FILE__,2,true] call mld_dbug_fnc_log_add;};
 
 
 
-['Nothing',_newKey,false,false,false,false,true] call mld_fnc_keys_displayBinding;
+['Nothing',_newKey,false,false,false,false,true] call mld_core_fnc_keys_displayBinding;

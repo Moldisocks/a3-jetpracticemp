@@ -18,9 +18,10 @@ onLoadMission = "Multiplayer Jet Practice";
 class cfgFunctions {
 	#include "functions\functions.hpp"
 };
-
-#include "resouces\gui_defines.hpp"
-#include "resouces\dialogs.hpp"
+#include "resources\colours.hpp"
+#include "resources\gui_defines.hpp"
+#include "external\VVS\menu.h"
+#include "resources\dialogs.hpp"
 class RscTitles {
-	#include "resouces\titles.hpp"
+	#include "resources\titles.hpp"
 };

@@ -28,7 +28,7 @@ class playerMenu {
 		class keyBindingsBtn: RscButton
 		{
 			idc = 1602;
-			action = "menus_changing = true; [] spawn mld_fnc_keys_menu";
+			action = "menus_changing = true; [] spawn mld_core_fnc_keys_menu";
 
 			text = "Key Bindings"; //--- ToDo: Localize;
 			x = 0.402031 * safezoneW + safezoneX;
@@ -39,7 +39,7 @@ class playerMenu {
 		class editHudBtn: RscButton
 		{
 			idc = 1602;
-			action = "[] call mld_fnc_hedit_menuInit;";
+			action = "[] call mld_core_fnc_hedit_menuInit;";
 
 			text = "Edit HUD"; //--- ToDo: Localize;
 			x = 0.474734 * safezoneW + safezoneX;
@@ -56,7 +56,7 @@ class playerMenu {
 			y = 0.2525 * safezoneH + safezoneY;
 			w = 0.180469 * safezoneW;
 			h = 0.033 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class bottomBar: IGUIBack
 		{
@@ -66,7 +66,7 @@ class playerMenu {
 			y = 0.46194 * safezoneH + safezoneY;
 			w = 0.180469 * safezoneW;
 			h = 0.0055 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class settingsBtn: RscButton
 		{
@@ -76,7 +76,7 @@ class playerMenu {
 			y = 0.467 * safezoneH + safezoneY;
 			w = 0.0716667 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = "menus_changing = true; [] call mld_fnc_pdata_menuInit;";
+			action = "menus_changing = true; [] call mld_core_fnc_pdata_menuInit;";
 		};
 		class sqaudText: RscStructuredText
 		{

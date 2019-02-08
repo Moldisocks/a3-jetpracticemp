@@ -35,7 +35,7 @@ class settingsMenu {
 			y = 0.258 * safezoneH + safezoneY;
 			w = 0.324844 * safezoneW;
 			h = 0.033 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class bottomBar: IGUIBack
 		{
@@ -45,7 +45,7 @@ class settingsMenu {
 			y = 0.599 * safezoneH + safezoneY;
 			w = 0.324844 * safezoneW;
 			h = 0.0055 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class settingsListbox: RscListbox
 		{
@@ -82,7 +82,7 @@ class settingsMenu {
 			y = 0.346 * safezoneH + safezoneY;
 			w = 0.061875 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = [] spawn mld_fnc_pdata_restoreDefaults;
+			action = [] spawn mld_core_fnc_pdata_restoreDefaults;
 		};
 		class helpButton: RscButton
 		{
@@ -92,7 +92,7 @@ class settingsMenu {
 			y = 0.258 * safezoneH + safezoneY;
 			w = 0.061875 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = ["settingsMenu help"] spawn mld_fnc_hmenu_menuInit;
+			action = ["settingsMenu help"] spawn mld_core_fnc_hmenu_menuInit;
 		};
 		class description: RscStructuredText
 		{

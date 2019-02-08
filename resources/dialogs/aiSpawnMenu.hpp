@@ -1,3 +1,15 @@
+/*
+	Author: Moldisocks
+	Last Modified: 2019.02.08 20.23
+	Email: moldisocks78@gmail.com
+
+	Notes:
+
+	Description:
+
+	To Do:
+
+*/
 class spawnAIMenu {
 	idd = 56242;
  	class controls {
@@ -10,7 +22,7 @@ class spawnAIMenu {
 			y = 0.1 * safezoneH + safezoneY;
 			w = 0.9 * safezoneW;
 			h = 0.84 * safezoneH;
-			colorBackground[] = {0.075,0.086,0.075,0.7};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class IGUIBack_2201: IGUIBack
 		{

@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified: Fri Oct 05 18:29:10 2018
+	Last Modified: 2019.02.08 18.47
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -47,7 +47,7 @@ hedit_lastCtrlPositions = [_hedit_ctrlPositions,_display];
 
 private _mainCtrlPos = ctrlPosition _topLeftMostCtrl;
 
-while {!hedit_posSelected} do 
+while {!hedit_posSelected} do
 {
 	_hedit_ctrlPositions = [];
 	_mousePos = getMousePosition;

@@ -17,4 +17,4 @@ createDialog "JetSpawnerMenu";
 waitUntil {!isNull (findDisplay 895);};
 
 
-{((findDisplay 895) displayCtrl 1500) lbAdd _x;} forEach jets_displayNames;
+{((findDisplay 895) displayCtrl 1500) lbAdd (getText (configFile >> "CfgVehicles" >> _x >> "DisplayName"));} forEach jets_classnames;

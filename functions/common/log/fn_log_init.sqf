@@ -24,7 +24,7 @@
 log_level = 1; //Default
 
 log_systemChat = true;
-log_explicit = true;
+log_explicit = false;
 log_diag_log = false;
 log_hint = false;
 

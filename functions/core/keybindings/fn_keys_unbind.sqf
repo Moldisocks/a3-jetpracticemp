@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Tue Jun 12 23:36:30 2018
+	Last Modified:  2019.02.08 19.01
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -13,6 +13,6 @@
 
 if (keys_currentKeyPressed == 42) then {
 	keys_bindings set[(lbCurSel 1500),0];
-	['Nothing',0] call mld_fnc_keys_displayBinding;
+	['Nothing',0] call mld_core_fnc_keys_displayBinding;
 	keys_currentKeyPressed = 0;
 };

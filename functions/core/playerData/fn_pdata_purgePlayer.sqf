@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2018.12.11 01.26
+	Last Modified:  2019.02.08 19.00
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -14,93 +14,56 @@
 //if (isServer) exitWith {diag_log "File: fn_dbug_purgePlayer.sqf ||| Wasn't executed on player"};
 
 params["_purgeItem",["_disableCheck",false]];
-
+_exitwith_follow_through = false;
 if (!_disableCheck) then {
-	["<br /><br /><t align='center'>Are you sure you?</t>",true] call mld_fnc_misc_msgbox;
+	["<br /><br /><t align='center'>Are you sure you?</t>",true] call mld_core_fnc_misc_msgbox;
 	waitUntil {misc_buttonPressed};
-	if (!misc_msgboxresult) exitWith {systemChat "purge cancelled"};
+	if (!misc_msgboxresult) exitWith {["Purge cancelled",__FILE__,2] call mld_dbug_fnc_log_add; _exitwith_follow_through = true;};
 };
+if (_exitwith_follow_through) exitWith {};
 switch (_purgeItem) do
 {
 	case "bindings":
 	{
-		systemChat "Purged bindings";
-		profileNamespace setVariable ["keybindings",nil];
-	};
-
-	case "loadout":
-	{
-		systemChat "Purged loadout";
-		profileNamespace setVariable ["kit_loadoutArray",nil];
+		["Purged keys_bindings",__FILE__,2] call mld_dbug_fnc_log_add;
+		profileNamespace setVariable ["keys_bindings",nil];
 	};
 
 	case "newPlayer":
 	{
-		systemChat "Purged newPlayer";
+		["Purged newPlayer",__FILE__,2] call mld_dbug_fnc_log_add;
 		profileNamespace setVariable ["newPlayer",nil];
-	};
-
-	case "primaryPurchases":
-	{
-		systemChat "Purged primaryPurchases";
-		profileNamespace setVariable ["kit_primaryPurchases",nil];
-	};
-	case "secondaryPurchases":
-	{
-		systemChat "Purged secondaryPurchases";
-		profileNamespace setVariable ["kit_secondaryPurchases",nil];
-	};
-	case "GadgetPurchases":
-	{
-		systemChat "Purged GadgetPurchases";
-		profileNamespace setVariable ["kit_gadgetPurchases",nil];
-	};
-	case "PerkPerchases":
-	{
-		systemChat "Purged PerkPerchases";
-		profileNamespace setVariable ["kit_perkPurchases",nil];
 	};
 	case "XP":
 	{
-		systemChat "Purged XP";
+		["Purged XP",__FILE__,2] call mld_dbug_fnc_log_add;
 		profileNamespace setVariable ["prog_XP",nil];
 	};
 	case "balance":
 	{
-		systemChat "Purged balance";
+		["Purged balance",__FILE__,2] call mld_dbug_fnc_log_add;
 		profileNamespace setVariable ["prog_Balance",nil];
 	};
 	case "HUDPos":
 	{
-		systemChat "Purged HUD positions";
+		["Purged HUD position",__FILE__,2] call mld_dbug_fnc_log_add;
 		profileNamespace setVariable ["hedit_displayPositions",nil];
 	};
-	case "AttachmentPurchases":
+	case "viewDistance":
 	{
-		systemChat "Purged attachment purchases";
-		profileNamespace setVariable ["kit_attachmentPurchases",nil];
-	};
-	case "Settings":{
-
-		systemChat "Purged player settings";
-		profileNamespace setVariable ["pdata_settings",nil];
-	};
+		["Purged pmenu_vDistance",__FILE__,2] call mld_dbug_fnc_log_add;
+		profileNamespace setVariable ["pmenu_vDistance",pmenu_vDistance];
+	}
 	default
 	{
 		//profileNamespace setVariable ["",nil];
-		systemChat "All Local player data has been purged";
-		profileNamespace setVariable ["keybindings",nil];
-		profileNamespace setVariable ["kit_loadoutArray",nil];
+		["Purged ALL private data",__FILE__,2] call mld_dbug_fnc_log_add;
+		profileNamespace setVariable ["keys_bindings",nil];
 		profileNamespace setVariable ["newPlayer",nil];
-		profileNamespace setVariable ["kit_secondaryPurchases",nil];
-	  	profileNamespace setVariable ["kit_primaryPurchases",nil];
-	  	profileNamespace setVariable ["kit_gadgetPurchases",nil];
-	  	profileNamespace setVariable ["kit_perkPurchases",nil];
-	  	profileNamespace setVariable ["prog_XP",nil];
-	  	profileNamespace setVariable ["prog_Balance",nil];
-	  	profileNamespace setVariable ["hedit_displayPositions",nil];
-	  	profileNamespace setVariable ["kit_attachmentPurchases",nil];
-		profileNamespace setVariable ["pdata_settings",nil];
+	  	//profileNamespace setVariable ["prog_XP",nil];
+	  	//profileNamespace setVariable ["prog_Balance",nil];
+	  	//profileNamespace setVariable ["hedit_displayPositions",nil];
+	  	profileNamespace setVariable ["pmenu_vDistance",nil];
 	};
 };
 

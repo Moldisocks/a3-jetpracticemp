@@ -18,7 +18,7 @@ class editKeysMenu {
 		class helpButton: RscButton
 		{
 			idc = 1603;
-			action = "[""Edit keybindings help""] spawn mld_fnc_hmenu_menuInit";
+			action = "[""Edit keybindings help""] spawn mld_core_fnc_hmenu_menuInit";
 
 			text = "Need Help?"; //--- ToDo: Localize;
 			x = 0.577344 * safezoneW + safezoneX;
@@ -35,7 +35,7 @@ class editKeysMenu {
 			y = 0.192 * safezoneH + safezoneY;
 			w = 0.159844 * safezoneW;
 			h = 0.033 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class functionListbox: RscListBox
 		{
@@ -56,13 +56,13 @@ class editKeysMenu {
 			y = 0.258779 * safezoneH + safezoneY;
 			w = 0.159844 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class bindText: RscStructuredText
 		{
 			idc = 1101;
-			onMouseButtonDblClick = "[] spawn mld_fnc_keys_getBinding";
-			onMouseButtonClick = "call mld_fnc_keys_unbind";
+			onMouseButtonDblClick = "[] spawn mld_core_fnc_keys_getBinding";
+			onMouseButtonClick = "call mld_core_fnc_keys_unbind";
 
 			text = "<t>Currently Bound to:  </t>"; //--- ToDo: Localize;
 			x = 0.412344 * safezoneW + safezoneX;
@@ -76,7 +76,7 @@ class editKeysMenu {
 		{
 			idc = 1601;
 			text = "Restore Defaults"; //--- ToDo: Localize;
-			action = "[true] spawn mld_fnc_keys_defaults;";
+			action = "[true] spawn mld_core_fnc_keys_defaults;";
 			x = 0.577344 * safezoneW + safezoneX;
 			y = 0.236 * safezoneH + safezoneY;
 			w = 0.061875 * safezoneW;

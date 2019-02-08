@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Oct 14 17:42:02 2018
+	Last Modified:  2019.02.08 18.53
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -13,14 +13,17 @@
 params["_spawnedFromMenu"];
 
 if (_spawnedFromMenu) then {
-	["<br /><br />This will reset all keybindings and exit the menu. Are you sure you want to proceed?",true] call mld_fnc_misc_msgbox;
+	["<br /><br />This will reset all keybindings and exit the menu. Are you sure you want to proceed?",true] call mld_core_fnc_misc_msgbox;
 	waitUntil {misc_buttonPressed};
 	if (misc_msgboxresult) then {
 		closeDialog 9885;
-		keys_bindings = [59,60,4,21,211,219,57,41,61];
-		profileNamespace setVariable ["keybindings",keys_bindings];
+		keys_bindings = [59,57,41,60];
+		profileNamespace setVariable ["keys_bindings",keys_bindings];
+		["keybindings set to default",__FILE__,2] call mld_dbug_fnc_log_add;
 	};
 } else {
-	keys_bindings = [59,60,4,21,211,219,57,41,61];
-	profileNamespace setVariable ["keybindings",keys_bindings];
+	keys_bindings = [59,57,41,60];
+	profileNamespace setVariable ["keys_bindings",keys_bindings];
+		["keybindings set to default",__FILE__,2] call mld_dbug_fnc_log_add;
+
 };

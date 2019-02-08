@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified: 2019.02.07 22.39
+	Last Modified: 2019.02.08 18.57
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -10,295 +10,175 @@
 	To Do:
 
 */
+_exitwith_follow_through = false;
 
-params ["_jetClassname"];
+if (isNull (findDisplay 895)) exitWith {["Display couldn't be found",__FILE__,1] call mld_dbug_fnc_log_add;};
 
-_airmin = "";
-_airmax = "";
-_groundPoint = "";
+
+_marker_air_min = "";
+_marker_air_max = "";
+_marker_ground_spawn = "";
+_spawn_altitude = 1000;
+_spawn_rotation = 0;
+_spawn_detection_radius = 15; //Radius is metres from ground spawn maker to check for vehicles before spawning.
 _jet = objNull;
-_groundSp = cbChecked ((findDisplay 895) displayCtrl 2801);
-_jetAlt = 0; // changing this line will not affect the altitude of the spawned in jet, read down further to find the same variable for each team.
-_Rotation = 0;
-_detectRadius = 15; // value that sets the detection radius for the ground spawning feature.
-if (side player == east) then {
-// for csat players------------------------------------------------------------------------------------------------------------------
-	if (_groundSp) then {
-		// for spawning on ground
-		_groundPoint = "csatgroundspawn"; // Marker that marks position for the jet to spawn on, rotation of marker is also taken into account.
-	} else {
-		// for spawning in the air
-		_airmin = "csatairspawn_1";
-		_airmax = "csatairspawn_2";
-		_Rotation = 220; // sets the median direction that the jet spawns in facing ( a random direction that is either 20 degrees left or right is selected base on this variable).
-		_jetAlt = 2000; // sets the exact altitude for the jet to spawn in at
-	};
-} else {
-	if (side player == west) then {
-// for nato players------------------------------------------------------------------------------------------------------------------
-	if (_groundSp) then {
-		// for spawning on ground
-		_groundPoint = "natogroundspawn"; // Marker that marks position for the jet to spawn on, rotation of marker is also taken into account.
-	} else {
-		// for spawning in the air
-		_airmin = "natoairspawn_1";
-		_airmax = "natoairspawn_2";
-		_Rotation = 320; // sets the main direction that the jet spawns in facing ( a random direction that is either 20 degrees left or right is selected base on this variable).
-		_jetAlt = 2000; // sets the exact altitude for the jet to spawn in at
-	};
-	} else {
-		if (side player == resistance) then {
-// for independent players-----------------------------------------------------------------------------------------------------------
-			if (_groundSp) then {
-			// for spawning on ground
-				_groundPoint = "guergroundspawn"; // Marker that marks position for the jet to spawn on, rotation of marker is also taken into account.
-			} else {
-		// for spawning in the air
-			_airmin = "guerairspawn_1";
-			_airmax = "guerairspawn_2";
-			_Rotation = 45; // sets the main direction that the jet spawns in facing ( a random direction that is either 20 degrees left or right is selected base on this variable).
-			_jetAlt = 2000; // sets the exact altitude for the jet to spawn in at
-			};
+_spawn_on_ground = cbChecked ((findDisplay 895) displayCtrl 2801);
+
+/*|========================================================CONFIG START==========================================
+  |	Setting descriptions:
+  |		_marker_air_min = Name of marker, that is to be placed at the bottom left of an imaginary rectangular spawn area.
+  |		_marker_air_max = Name of marker, that is to be placed at the top right of an imaginary rectangular spawn area.
+  | 		_marker_ground_spawn = Name of marker, that specifies the position that jets will be spawned on when the "spawn on ground" checkbox is selected.
+  | 		_spawn_altitude = The altitude jets will be spawned at in the air. Number is in metres from sea level.
+  | 		_spawn_direction = The direction jets will be spawned in, when spawning in the air. Number specifies degrees, ranges from 0 to 360, where North=0,East=90,South=180 and West=270.
+  |
+  |	The below configuration settings should be configured on a per team basis, such that each team will spawn at different markers and in different directions and altitudes.
+  |============================================================================================================*/
+switch (playerSide) do
+{
+	case east: //Opfor
+	{
+		if (_spawn_on_ground) then {
+			_marker_ground_spawn = "csat_ground_spawn";
 		} else {
-//for civillian players---------------------------------------------------------------------------------------------------------------
-			if (_groundSp) then {
-		// for spawning on ground
-				_groundPoint = "civgroundspawn"; // Marker that marks position for the jet to spawn on, rotation of marker is also taken into account.
-			} else {
-		// for spawning in the air
-			_airmin = "civairspawn_1";
-			_airmax = "civairspawn_2";
-			_Rotation = 45; // sets the main direction that the jet spawns in facing ( a random direction that is either 20 degrees left or right is selected base on this variable).
-			_jetAlt = 2000; // sets the exact altitude for the jet to spawn in at
-			};
+			_marker_air_min = "csat_air_min";
+			_marker_air_max = "csat_air_max";
+			//_spawn_altitude = 1000;
+			_spawn_rotation = 180;
 		};
+	};
+
+	case west://Nato
+	{
+		if (_spawn_on_ground) then {
+			_marker_ground_spawn = "nato_ground_spawn";
+		} else {
+			_marker_air_min = "nato_air_min";
+			_marker_air_max = "nato_air_max";
+			//_spawn_altitude = 1000;
+			//_spawn_rotation = 0;
+		};
+	};
+
+	case resistance: //Independent
+	{
+		if (_spawn_on_ground) then {
+			_marker_ground_spawn = "nato_ground_spawn";
+		} else {
+			_marker_air_min = "nato_air_min";
+			_marker_air_max = "nato_air_max";
+			//_spawn_altitude = 1000;
+			_spawn_rotation = 90;
+		};
+	};
+
+	case civilian: //Civilian
+	{
+		if (_spawn_on_ground) then {
+			_marker_ground_spawn = "civ_ground_spawn";
+		} else {
+			_marker_air_min = "civ_air_min";
+			_marker_air_max = "civ_air_max";
+			//_spawn_altitude = 1000;
+			_spawn_rotation = 270;
+		};
+	};
+	default
+	{
+		if (true) exitWith {["playerSide failed to return a standard side",__FILE__,1] call mld_dbug_fnc_log_add; _exitwith_follow_through=true;};
 	};
 };
 
 
-if (_groundSp) then {
-		// for spawning on ground
-	if (getMarkerColor _groundPoint == "") then {
-		systemChat format ["--------------------------------********--ERROR--ERROR--*******---------------------------------
-		Marker: %1  Have not been placed and/or named correctly. Refer to the JS-Setup.txt file for setup instructions.", _groundPoint];
-		hintSilent "ERROR!!";
-		sleep (2);
-		hintSilent "";
-	} else {
-		_Dir = markerDir _groundPoint;
-		_mpos = getMarkerPos _groundPoint;
-		_Xcrd = _mpos select 0;
-		_Ycrd = _mpos select 1;
-		_objarray = nearestObjects [_mpos,["Plane"],_detectRadius];
-		_objstr = _objarray select 0;
-		if (isNil "_objstr")then{
-
-			_jet= createVehicle [_jetClassname,[_Xcrd,_Ycrd,0], [], 0, "NONE"];
-			_jet setDir _Dir;
+if (_exitwith_follow_through) exitWith {};
 
 
-
-
-
-			if (_jetClassname == "O_PLANE_FIGHTER_02_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "weapon_KAB250Launcher";
-			_jet removeWeapon "Laserdesignator_pilotCamera";
-			_jet removeWeapon "weapon_R77Launcher";
-			[_jet,"Cannon_30mm_Plane_CAS_02_F",1] call BIS_fnc_addWeapon;
-			};
-
-			if (_jetClassname == "B_PLANE_FIGHTER_01_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "weapon_AMRAAMLauncher";
-			_jet removeWeapon "weapon_AGM_65Launcher";
-			_jet removeWeapon "Laserdesignator_pilotCamera";
-			_jet removeWeapon "weapon_GBU12Launcher";
-			[_jet,"weapon_Fighter_Gun20mm_AA",1] call BIS_fnc_addWeapon;
-			};
-			if (_jetClassname == "I_PLANE_FIGHTER_04_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "weapon_AMRAAMLauncher";
-			_jet removeWeapon "weapon_AGM_65Launcher";
-			_jet removeWeapon "Laserdesignator_pilotCamera";
-			_jet removeWeapon "weapon_GBU12Launcher";
-			[_jet,"weapon_Fighter_Gun20mm_AA",0] call BIS_fnc_addWeapon;
-			_jet addMagazine ["magazine_Fighter04_Gun20mm_AA_x250",250];
-			};
-
-
-			if (_jetClassname == "B_PLANE_CAS_01_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "Rocket_04_AP_Plane_CAS_01_F";
-			_jet removeWeapon "Rocket_04_HE_Plane_CAS_01_F";
-			_jet removeWeapon "Missile_AGM_02_Plane_CAS_01_F";
-			_jet removeWeapon "Laserdesignator_pilotCamera";
-			_jet removeWeapon "Bomb_04_Plane_CAS_01_F";
-			[_jet,"Gatling_30mm_Plane_CAS_01_F",0] call BIS_fnc_addWeapon;
-			};
-
-
-			if (_jetClassname == "O_PLANE_CAS_02_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "Rocket_03_AP_Plane_CAS_02_F";
-			_jet removeWeapon "Rocket_03_HE_Plane_CAS_02_F";
-			_jet removeWeapon "Missile_AGM_01_Plane_CAS_02_F";
-			_jet removeWeapon "Laserdesignator_pilotCamera";
-			_jet removeWeapon "Bomb_03_Plane_CAS_02_F";
-			[_jet,"Cannon_30mm_Plane_CAS_02_F",0] call BIS_fnc_addWeapon;
-			};
-
-
-			if (_jetClassname == "I_Plane_Fighter_03_AA_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "missiles_ASRAAM";
-			_jet addMagazine "1x 300Rnd_20mm_shells";
-			[_jet,"Twin_Cannon_20mm",0] call BIS_fnc_addWeapon;
-			};
-
-
-			if (_jetClassname == "I_Plane_Fighter_03_CAS_F") then {
-			_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-			_jet removeWeapon _wep;
-			_jet removeWeapon "missiles_SCALPEL";
-			_jet removeWeapon "GBU12BombLauncher_Plane_Fighter_03_F";
-			_jet removeWeapon "Laserdesignator_pilotCamera";
-			_jet addMagazine "1x 300Rnd_20mm_shells";
-			[_jet,"Twin_Cannon_20mm",0] call BIS_fnc_addWeapon;
-			};
-
-			if (_jetClassname == "C_Plane_Civil_01_racing_F") then {
-			[_jet,"weapon_Cannon_Phalanx",5] call BIS_fnc_addWeapon;
-			[_jet,"missiles_DAR",5] call BIS_fnc_addWeapon;
-			[_jet,"Missile_AA_04_Plane_CAS_01_F",5] call BIS_fnc_addWeapon;
-			[_jet,"CMFlareLauncher",15] call BIS_fnc_addWeapon;
-			};
-
-
-			player moveInDriver _jet;
-			_jet engineOn true;
-
-		} else {
-			hintSilent "Spawn Area is full!";
-			systemChat "Ensure that the jet's ground spawn area is kept clear";
-			sleep (5);
-			hintSilent "";
-		};
+_isGroundBound = {
+	private _ground_only_jets = []; //Specify which jets (by classname string) are only allowed to be spawned on the ground. Leave empty to allow all.
+	params ["_jet_to_check"];
+	_result = false;
+	if ((_ground_only_jets find _jet_to_check) != -1) then {
+		_result = true;
 	};
-} else {
-		//for spawning in the air
-		if (!(getMarkerColor _airmin == "") && !(getMarkerColor _airmax == "")) then {
-			_markerPosMin = getMarkerPos _airmin;
-			_markerPosMax = getMarkerPos _airmax;
-			_minXcrd = _markerPosMin select 0;
-			_maxXcrd = _markerPosMax select 0;
-			_minYcrd = _markerPosMin select 1;
-			_maxYcrd = _markerPosMax select 1;
-			_midXcrd = (_minXcrd +_maxXcrd)/2;
-			_midYcrd =(_minYcrd +_maxYcrd)/2;
-			_Xcrd = random [_minXcrd,_midXcrd ,_maxXcrd];
-			_Ycrd = random [_minYcrd,_midYcrd ,_maxYcrd];
-			_RanDir = random [_Rotation - 20,_Rotation,_Rotation + 20];
-		};
-	} else {
-		systemChat format ["--------------------------------********--ERROR--ERROR--*******---------------------------------
-		Marker: %1 And Marker: %2, Have not been placed and/or named correctly. Refer to the JS-Setup.txt file for setup instructions",_airmin,_airmax];
-		hintSilent "ERROR!!";
-		sleep (2);
-		hintSilent "";
-	};
-	};
-
-	if (_jetClassname == "C_Plane_Civil_01_racing_F") then {
-		systemChat "The Redneck Attack-Jet Cannot be spawned into the air";
-	} else {
-	_jet= createVehicle [_jetClassname,[_Xcrd,_Ycrd,_jetAlt], [], 0, "NONE"];
-	_jet setDir _RanDir;
-	_direction = getDir _jet;
-	_jet setVelocity [sin _direction * 222.222 ,cos _direction * 222.222,0];
-
-
-	if (_jetClassname == "O_PLANE_FIGHTER_02_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "weapon_Fighter_Gun_30mm";
-	_jet removeWeapon "Laserdesignator_pilotCamera";
-	_jet removeWeapon "weapon_KAB250Launcher";
-	_jet removeWeapon "weapon_R77Launcher";
-	[_jet,"Cannon_30mm_Plane_CAS_02_F",1] call BIS_fnc_addWeapon;
-	};
-
-	if (_jetClassname == "B_PLANE_FIGHTER_01_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "weapon_AMRAAMLauncher";
-	_jet removeWeapon "Laserdesignator_pilotCamera";
-	_jet removeWeapon "weapon_AGM_65Launcher";
-	_jet removeWeapon "weapon_GBU12Launcher";
-	[_jet,"weapon_Fighter_Gun20mm_AA",1] call BIS_fnc_addWeapon;
-	};
-
-	if (_jetClassname == "I_PLANE_FIGHTER_04_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "weapon_AMRAAMLauncher";
-	_jet removeWeapon "weapon_AGM_65Launcher";
-	_jet removeWeapon "Laserdesignator_pilotCamera";
-	_jet removeWeapon "weapon_GBU12Launcher";
-	[_jet,"weapon_Fighter_Gun20mm_AA",0] call BIS_fnc_addWeapon;
-	_jet addMagazine ["magazine_Fighter04_Gun20mm_AA_x250",250];
-	};
-
-	if (_jetClassname == "B_PLANE_CAS_01_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "Rocket_04_AP_Plane_CAS_01_F";
-	_jet removeWeapon "Rocket_04_HE_Plane_CAS_01_F";
-	_jet removeWeapon "Missile_AGM_02_Plane_CAS_01_F";
-	_jet removeWeapon "Laserdesignator_pilotCamera";
-	_jet removeWeapon "Bomb_04_Plane_CAS_01_F";
-	[_jet,"Gatling_30mm_Plane_CAS_01_F",0] call BIS_fnc_addWeapon;
-	};
-
-
-	if (_jetClassname == "O_PLANE_CAS_02_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "Rocket_03_AP_Plane_CAS_02_F";
-	_jet removeWeapon "Rocket_03_HE_Plane_CAS_02_F";
-	_jet removeWeapon "Missile_AGM_01_Plane_CAS_02_F";
-	_jet removeWeapon "Laserdesignator_pilotCamera";
-	_jet removeWeapon "Bomb_03_Plane_CAS_02_F";
-	[_jet,"Cannon_30mm_Plane_CAS_02_F",0] call BIS_fnc_addWeapon;
-	};
-
-
-	if (_jetClassname == "I_Plane_Fighter_03_AA_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "missiles_ASRAAM";
-	_jet addMagazine "1x 300Rnd_20mm_shells";
-	[_jet,"Twin_Cannon_20mm",0] call BIS_fnc_addWeapon;
-	};
-
-
-	if (_jetClassname == "I_Plane_Fighter_03_CAS_F") then {
-	_wep = (getArray (configfile >> "CfgVehicles" >> _jetClassname >> "weapons")) select 0;
-	_jet removeWeapon _wep;
-	_jet removeWeapon "missiles_SCALPEL";
-	_jet removeWeapon "GBU12BombLauncher_Plane_Fighter_03_F";
-	_jet removeWeapon "Laserdesignator_pilotCamera";
-	_jet addMagazine "1x 300Rnd_20mm_shells";
-	[_jet,"Twin_Cannon_20mm",0] call BIS_fnc_addWeapon;
+	_result;
 };
+/*========================================================CONFIG END============================================*/
 
+
+_jet_classname = jets_classnames select (lbCurSel 1500);
+
+
+closeDialog 895;
+
+
+if (_spawn_on_ground) then {
+	["Spawning on ground",__FILE__,1] call mld_dbug_fnc_log_add;
+
+	if (getMarkerColor _marker_ground_spawn == "") exitWith {[format ["The %1 ground maker hasn't been placed or named correctly within eden", playerSide],__FILE__,3] call mld_dbug_fnc_log_add;_exitwith_follow_through=true;};
+
+	private _pos = getMarkerPos _marker_ground_spawn;
+	_nearbyObjects = nearestObjects [_pos,["Plane","Car","Tank"],_spawn_detection_radius];
+
+	if (count _nearbyObjects > 0) then {
+		_vehCrew = [];
+		{
+			if (count (crew _x) > 0) then {
+				_vehCrew pushBack _x;
+				[format ["%1 x Vehicle(s) already on the spawn pad", count _vehCrew],__FILE__,3,true] call mld_dbug_fnc_log_add;
+			};
+		} forEach _nearbyObjects;
+
+		if (count _vehCrew <= 0) then {
+			{
+				deleteVehicle _x;
+			} forEach _nearbyObjects;
+		}  else {
+			{
+				if (_vehCrew find _x >= 0) then {
+					[format ["There is already a %1 on the spawnpad",(getText (configFile >> "CfgVehicles" >> typeOf(_x) >> "DisplayName"))],__FILE__,2,true] call mld_dbug_fnc_log_add;
+				} else {
+					deleteVehicle _x;
+				};
+			} forEach _nearbyObjects;
+			_nearbyObjects = nearestObjects [_pos,["Plane","Car","Tank"],_spawn_detection_radius];
+			if (count _nearbyObjects > 0) then {
+				["<br /><br />There could be vehicles blocking the spawn pad, would you like to spawn anyway?",true] call mld_fnc_misc_msgbox;
+				waitUntil {misc_buttonPressed};
+				if (!misc_buttonPressed) exitWith {["Vehicles could be blocking spawnpad, user choose not to spawn",__FILE__,1] call mld_dbug_fnc_log_add; _exitwith_follow_through=true;};
+			};
+		};
+	};
+	if (_exitwith_follow_through) exitWith {};
+
+	_jet = _jet_classname createVehicle [_pos select 0,_pos select 1,0];
+	_jet setDir (markerDir _marker_ground_spawn);
+
+} else {
+	["Spawning in air",__FILE__,1] call mld_dbug_fnc_log_add;
+
+	if ((getMarkerColor _marker_air_min == "") or (getMarkerColor _marker_air_max == "")) exitWith {[format ["Couldn't find either the min or max air spawn markers for %1",playerSide],__FILE__,3] call mld_dbug_fnc_log_add; _exitwith_follow_through = true;};
+
+	_minXcrd = (getMarkerPos _marker_air_min) select 0;
+	_maxXcrd = (getMarkerPos _marker_air_max) select 0;
+	_minYcrd = (getMarkerPos _marker_air_min) select 1;
+	_maxYcrd = (getMarkerPos _marker_air_max) select 1;
+	_midXcrd = (_minXcrd +_maxXcrd)/2;
+	_midYcrd =(_minYcrd +_maxYcrd)/2;
+	_Xcrd = random [_minXcrd,_midXcrd ,_maxXcrd];
+	_Ycrd = random [_minYcrd,_midYcrd ,_maxYcrd];
+	_randomDir = random [_spawn_rotation - 20,_spawn_rotation,_spawn_rotation + 20];
+
+	if ([_jet_classname] call _isGroundBound) exitWith {["Cannot spawn this jet in the air, it is ground bound",__FILE__,3,true] call mld_dbug_fnc_log_add; _exitwith_follow_through = true;};
+	_jet = createVehicle [_jet_classname,[_Xcrd,_Ycrd,_spawn_altitude],[],0,"FLY"];
+	_jet setDir _randomDir;
+	_jet setVelocity [sin _randomDir * 222.222 ,cos _randomDir * 222.222,0]; //Experimental. Used to supplement the speed of the jet when spawning, so that it doesn't fall out of the sky.
+["Spawned vehicle",__FILE__,1] call mld_dbug_fnc_log_add;
+
+};
+if (_exitwith_follow_through) exitWith {};
 
 player moveInDriver _jet;
 
-_jet engineOn true;
+
+
+[_jet] call mld_core_fnc_jets_arm;

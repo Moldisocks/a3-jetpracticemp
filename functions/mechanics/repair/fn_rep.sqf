@@ -1,4 +1,15 @@
+/*
+	Author: Moldisocks
+	Last Modified: 2019.02.08 19.03
+	Email: moldisocks78@gmail.com
 
+	Notes:
+
+	Description:
+
+	To Do:
+
+*/
 _veh = vehicle player;
 _cancelled = false;
 disableSerialization;

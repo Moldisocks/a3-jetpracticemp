@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Sep 02 12:56:54 2018
+	Last Modified:  2019.02.08 19.02
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -24,7 +24,7 @@ if (_animNameCheck == "Perc") then {
 	if (!isNil "_pSpdKH") then {
 		_pDir = getDir player;
 		_pSpdMs = (_pSpdKH*1000)/3600;
-		
+
 		player setVelocity [sin _pDir * _pSpdMs,cos _pDir * _pSpdMs,jump_zVel];
 		player animate ["AovrPercMrunSrasWrflDf",1];
 	};

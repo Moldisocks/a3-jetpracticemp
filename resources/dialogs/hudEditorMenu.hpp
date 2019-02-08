@@ -24,7 +24,7 @@ class hudEditorMenu {
 			y = 0.269 * safezoneH + safezoneY;
 			w = 0.134062 * safezoneW;
 			h = 0.022 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class menuListbox: RscListBox
 		{
@@ -38,7 +38,7 @@ class hudEditorMenu {
 		class editButton: RscButton
 		{
 			idc = 1600;
-			action = "[] spawn mld_fnc_hedit_moveHud;";
+			action = "[] spawn mld_core_fnc_hedit_moveHud;";
 
 			text = "Edit"; //--- ToDo: Localize;
 			x = 0.438125 * safezoneW + safezoneX;
@@ -49,7 +49,7 @@ class hudEditorMenu {
 		class undoButton: RscButton
 		{
 			idc = 1600;
-			action = "[] spawn mld_fnc_hedit_undoLast;";
+			action = "[] spawn mld_core_fnc_hedit_undoLast;";
 
 			text = "Undo Last"; //--- ToDo: Localize;
 			x = 0.505156 * safezoneW + safezoneX;
@@ -60,7 +60,7 @@ class hudEditorMenu {
 		class helpButton: RscButton
 		{
 			idc = 1601;
-			action = "['HUD Editor'] call mld_fnc_hmenu_menuInit;";
+			action = "['HUD Editor'] call mld_core_fnc_hmenu_menuInit;";
 
 			text = "Need help?"; //--- ToDo: Localize;
 			x = 0.577344 * safezoneW + safezoneX;
@@ -71,7 +71,7 @@ class hudEditorMenu {
 		class resetBtn: RscButton
 		{
 			idc = 1601;
-			action = "[true] spawn mld_fnc_hedit_defaults;";
+			action = "[true] spawn mld_core_fnc_hedit_defaults;";
 
 			text = "Restore Defaults"; //--- ToDo: Localize;
 			x = 0.577344 * safezoneW + safezoneX;
@@ -90,5 +90,5 @@ class hudEditorMenu {
 			w = 0.061875 * safezoneW;
 			h = 0.033 * safezoneH;
 		};
-	};	
+	};
 };

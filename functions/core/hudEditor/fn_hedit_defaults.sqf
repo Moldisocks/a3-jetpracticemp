@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Oct 14 15:40:58 2018
+	Last Modified:  2019.02.08 19.01
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -58,7 +58,7 @@ _setDefaults = {
 		};
 	};
 
-	
+
 };
 
 if (_spawnedFromMenu) then {

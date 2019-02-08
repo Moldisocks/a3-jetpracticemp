@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Oct 14 14:45:00 2018
+	Last Modified:  2019.02.08 19.01
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -22,8 +22,8 @@ if (isNull (uiNamespace getVariable (hedit_lastCtrlPositions select 1))) then {
 
 _hedit_ctrls = allControls (uiNamespace getVariable (hedit_lastCtrlPositions select 1));
 {
-	private _ctrlXPos = ((hedit_lastCtrlPositions select 0) select _foreachIndex) select 0; 
-	private _ctrlyPos = ((hedit_lastCtrlPositions select 0) select _foreachIndex) select 1; 
+	private _ctrlXPos = ((hedit_lastCtrlPositions select 0) select _foreachIndex) select 0;
+	private _ctrlyPos = ((hedit_lastCtrlPositions select 0) select _foreachIndex) select 1;
 	_x ctrlSetPosition [_ctrlXPos,_ctrlyPos];
 	_x ctrlCommit 0.1;
 } forEach _hedit_ctrls;

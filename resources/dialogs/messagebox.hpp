@@ -23,7 +23,7 @@ class messagebox {
 			y = 0.423 * safezoneH + safezoneY;
 			w = 0.165 * safezoneW;
 			h = 0.011 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class msg: RscStructuredText
 		{
@@ -53,5 +53,5 @@ class messagebox {
 			w = 0.0309375 * safezoneW;
 			h = 0.033 * safezoneH;
 		};
-	};	
+	};
 };

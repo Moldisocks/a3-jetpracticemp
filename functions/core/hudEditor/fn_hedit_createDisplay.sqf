@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Thu Oct 04 19:53:45 2018
+	Last Modified:  2019.02.08 18.41
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -14,11 +14,12 @@
 params["_create","_layerName","_titleName"];
 _layerNmber = -1;
 if (_create) then {
-	if (isNil "_titleName") exitWith{systemChat "File: fn_hedit_createDisplay.sqf ||| Nil var _titleName"};
+
 	_titleIndex = hedit_displays find _titleName;
-	if (_titleIndex == -1) exitWith {systemChat "File: fn_hedit_createDisplay.sqf ||| Unknown display name"};
-	if (isNil "_layerName") exitWith{systemChat "File: fn_hedit_createDisplay.sqf ||| Nil var _layerName"};
-	
+	if (_titleIndex == -1) exitWith {["Unknown display name",__FILE__,1] call mld_dbug_fnc_log_add;};
+	if (isNil "_layerName") exitWith{["Nil var _layerName",__FILE__,1] call mld_dbug_fnc_log_add;};
+	if (isNil "_titleName") exitWith{["Nil var _titleName",__FILE__,1] call mld_dbug_fnc_log_add;};
+
 	_layerNmber = _layerName cutRsc [_titleName,"PLAIN"];
 	waitUntil {!isNull (uiNamespace getVariable _titleName)};
 
@@ -30,7 +31,7 @@ if (_create) then {
 		_x ctrlCommit 0;
 	} forEach _ctrlList;
 } else {
-	if (isNil "_layerName") exitWith{systemChat "File: fn_hedit_createDisplay.sqf ||| Nil var _layerName"};
+	if (isNil "_titleName") exitWith{["Nil var _layerName",__FILE__,1] call mld_dbug_fnc_log_add;};
 
 	_layerName cutText ["","PLAIN"];
 };

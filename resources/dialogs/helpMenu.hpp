@@ -24,7 +24,7 @@ class helpMenu {
 			y = 0.19002 * safezoneH + safezoneY;
 			w = 0.516146 * safezoneW;
 			h = 0.033 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class textmain: RscStructuredText
 		{
@@ -45,7 +45,7 @@ class helpMenu {
 			y = 0.192 * safezoneH + safezoneY;
 			w = 0.00515625 * safezoneW;
 			h = 0.55 * safezoneH;
-			colorBackground[] = {0.608,0.29,0.027,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 		class otherHelpListbox: RscListBox
 		{
@@ -66,7 +66,7 @@ class helpMenu {
 			y = 0.19002 * safezoneH + safezoneY;
 			w = 0.12375 * safezoneW;
 			h = 0.033 * safezoneH;
-			colorBackground[] = {0.808,0.49,0.047,1};
+			colorBackground[] = COLOR_JETGREEN;
 		};
 
 	};
