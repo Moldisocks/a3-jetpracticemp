@@ -17,3 +17,4 @@ if (isNil "cusRadio") then {
 	cusRadio = radioChannelCreate [[0.92,0.92,0.92,1],"","SAFEZONE",allUnits,false];
 };
 publicVariable "cusRadio";
+

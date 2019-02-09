@@ -135,7 +135,7 @@ class JetSpawnerMenu {
 		};
 		class defaultLoadoutCb: RscCheckBox
 		{
-			idc = 2801;
+			idc = 2802;
 
 			x = 0.530643 * safezoneW + safezoneX;
 			y = 0.524593 * safezoneH + safezoneY;

@@ -42,3 +42,9 @@ waitUntil {vehicle player == player};
 [] call mld_core_fnc_hedit_init;
 [] call mld_core_fnc_mec_localEventHandlers;
 
+pmenu_vDistance = profileNamespace getVariable "pmenu_vDistance";
+if (isNil "pmenu_vDistance") then {
+	pmenu_vDistance = 2500;
+	profileNamespace setVariable ["pmenu_vDistance",pmenu_vDistance];
+};
+setViewDistance pmenu_vDistance;

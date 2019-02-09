@@ -72,16 +72,20 @@ class mld_core {
 		class mec_damageHandler{};
 		class mec_killed{};
 		class sp_respawn{};
+		class mec_getIn{};
+		class mec_getOut{};
 	};
 	class movement {
 		file = "functions\mechanics\movement";
 		class mec_jump{};
 		class mec_godMode{};
 	};
-	// class repair {
-	// 	file = "functions\mechanics\repair"
+	class repair {
+		file = "functions\mechanics\repair"
 
-	// }
+		class rep{};
+		class rep_gui{};
+	}
 	class safezone {
 		file = "functions\mechanics\safezone";
 		class safe_init{};

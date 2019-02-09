@@ -14,4 +14,7 @@
 player addEventHandler ["Respawn",{[] spawn mld_core_fnc_sp_respawn}];
 player addEventHandler ["Killed",{call mld_core_fnc_mec_killed}];
 (findDisplay 46) displayAddEventHandler ["KeyDown", {call mld_core_fnc_keys_downPressHandler}];
+player addEventHandler ["GetInMan",{call mld_core_fnc_mec_getIn;}];
+player addEventHandler ["GetOutMan",{call mld_core_fnc_mec_getOut;}];
+
 //player addEventHandler ["HandleDamage",{call mld_core_fnc_mec_damageHandler}];

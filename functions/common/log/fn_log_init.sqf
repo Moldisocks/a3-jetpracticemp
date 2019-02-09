@@ -15,13 +15,13 @@
 	Log Level enumeration:
 		disabled = 0,
 		debug = 1,
-		info = 2,
+		user = 2,
 		warning = 3,
 		error = 4,
 		critical =5
 */
 
-log_level = 1; //Default
+log_level = 2; //Default
 
 log_systemChat = true;
 log_explicit = false;

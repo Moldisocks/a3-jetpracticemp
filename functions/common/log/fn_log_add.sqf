@@ -40,8 +40,12 @@ if (_doLog) then {
 		if (log_systemChat) then {
 			if (_log_level == 2) then {
 				systemChat format ["%1", _message];
+
 			} else {
 				systemChat format ["%1 - File: %2 - %3",_log_level_str,_scope, _message];
+			};
+			if (_hint) then {
+					hint _message;
 			};
 		};
 		if (log_diag_log) then {

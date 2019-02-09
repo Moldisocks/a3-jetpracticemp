@@ -1,8 +1,8 @@
 Mission: JetPracticeMP
 Description: A multiplayer sandbox mission that allows players to easily practice their jetting gameplay.
 
-Current verison: v1.0
-Last Modified: 2019.02.09 04.20
+Current verison: v1.1
+Last Modified: 2019.02.09 15.14
 
 Author: Moldisocks
 Email: moldisocks78@gmail.com
@@ -16,13 +16,13 @@ Features:
 	- HUD customisation system
 	- Mission keybinding system
 	- Jumping
+	- Repair functions
+	- Jet loadout system
 
 Future features:
 	- Teleport system
 	- Jet matchmaking system
-	- Jet loadout system
 	- Points system
-	- Repair functions
 	- Enemy jet spawner.
 	- Modifcation to VVS to allow play to select a position on map to spawn vehicle on.
 
@@ -34,3 +34,6 @@ Version 1.0:
 	- Added: Keybinding system
 	- Added: Movement mechanics
 	- Improved: All code base and GUIs
+Version 1.1:
+	- Added: Jet loadout system
+	- Added: Vehicle servicing functions

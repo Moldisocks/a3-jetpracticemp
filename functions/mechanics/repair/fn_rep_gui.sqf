@@ -1,14 +1,23 @@
+/*
+	Author: Moldisocks
+	Last Modified: 2019.02.09 13.41
+	Email: moldisocks78@gmail.com
+
+	Notes:
+
+	Description:
+
+	To Do:
+
+*/
+#include "..\..\..\resources\colours.hpp"
 
 params ["_counter"];
-if (!Servicing) then {
-repairGuiLayer = "repairGui" cutRsc ["repProgress","PLAIN"];
+if (isNull (uiNamespace getVariable "repProgress")) then {
+	[true,"repairLayer","repProgress"] call mld_core_fnc_hedit_createDisplay;
 };
 
-
-
-
 _ct = _counter/35;
-((uiNamespace getVariable "repProgress") displayCtrl 1100) ctrlSetStructuredText parseText "<t color = '#77af3b' size = '1.4' align = 'center'> Servicing Vehicle</t>";
-((uiNamespace getVariable "repProgress") displayCtrl 4582) ctrlSetTextColor [0.886,0.773,0.184,1];
+((uiNamespace getVariable "repProgress") displayCtrl 4582) ctrlSetTextColor COLOR_JETGREEN_ARR;
 ((uiNamespace getVariable "repProgress") displayCtrl 4582) progressSetPosition _ct;
 

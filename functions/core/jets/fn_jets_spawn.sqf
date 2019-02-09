@@ -179,6 +179,6 @@ if (_exitwith_follow_through) exitWith {};
 
 player moveInDriver _jet;
 
-
-
-[_jet] call mld_core_fnc_jets_arm;
+if (!cbChecked ((findDisplay 895) displayCtrl 2802)) then {
+	[_jet] call mld_core_fnc_jets_arm;
+};
