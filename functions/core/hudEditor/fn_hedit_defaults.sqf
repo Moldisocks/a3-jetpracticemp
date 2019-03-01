@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.08 19.01
+	Last Modified:  2019.03.01 20.40
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -45,7 +45,7 @@ _setDefaults = {
 		hedit_displayPositions pushback _defaultCtrlPostiions;
 	} forEach hedit_displays;
 
-	profileNamespace setVariable["hedit_displayPositions",hedit_displayPositions];
+	profileNamespace setVariable["jp_hedit_displayPositions",hedit_displayPositions];
 
 	[] call _closeAllHuds;
 

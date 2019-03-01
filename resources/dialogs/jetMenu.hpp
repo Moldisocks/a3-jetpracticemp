@@ -54,6 +54,15 @@ class JetSpawnerMenu {
 			w = 0.00875188 * safezoneW;
 			h = 0.0145925 * safezoneH;
 		};
+		class defaultLoadoutCb: RscCheckBox
+		{
+			idc = 2802;
+
+			x = 0.530643 * safezoneW + safezoneX;
+			y = 0.524593 * safezoneH + safezoneY;
+			w = 0.00875188 * safezoneW;
+			h = 0.0145925 * safezoneH;
+		};
 		class topBar: RscStructuredText
 		{
 			idc = 1100;
@@ -133,15 +142,5 @@ class JetSpawnerMenu {
 			h = 0.022 * safezoneH;
 			colorBackground[] = {0,0,0,0};
 		};
-		class defaultLoadoutCb: RscCheckBox
-		{
-			idc = 2802;
-
-			x = 0.530643 * safezoneW + safezoneX;
-			y = 0.524593 * safezoneH + safezoneY;
-			w = 0.00875188 * safezoneW;
-			h = 0.0145925 * safezoneH;
-		};
-
 	};
 };

@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  Sun Jun 17 14:23:34 2018
+	Last Modified:  2019.02.09 21.25
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -18,7 +18,7 @@ class welcomeScreen { // Screen to
 		class subTitle: RscStructuredText
 		{
 			idc = 1101;
-			text = "<t size='0.9' align='left'> New to AF3?</t>"; //--- ToDo: Localize;
+			text = "<t size='0.9' align='left'>Overview</t>"; //--- ToDo: Localize;
 			x = 0.242708 * safezoneW + safezoneX;
 			y = 0.462482 * safezoneH + safezoneY;
 			w = 0.180469 * safezoneW;
@@ -28,7 +28,7 @@ class welcomeScreen { // Screen to
 		class topBar: RscStructuredText
 		{
 			idc = 1100;
-			text = "<t size='1.2' align='center'> Welcome to Arma-Field 3 </t>"; //--- ToDo: Localize;
+			text = "<t size='1.2' align='center'>Welcome to Jet Practice - Multiplayer</t>"; //--- ToDo: Localize;
 			x = 0.242187 * safezoneW + safezoneX;
 			y = 0.197444 * safezoneH + safezoneY;
 			w = 0.515104 * safezoneW;
@@ -63,7 +63,7 @@ class welcomeScreen { // Screen to
 			y = 0.731 * safezoneH + safezoneY;
 			w = 0.0773437 * safezoneW;
 			h = 0.033 * safezoneH;
-			action = "closeDialog 4645; [] spawn mld_core_fnc_sp_respawn";
+			action = "closeDialog 4645;";
 			shortcuts[] = {"0x01"};
 		};
 		class bottomBar: IGUIBack

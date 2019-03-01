@@ -16,13 +16,13 @@ switch (_this select 0) do
 	case "Quickstart Guide":
 	{
 		((findDisplay 7546) displayCtrl 1102) ctrlSetStructuredText parseText "
-		<t size='0.9' font='PuristaBold'>How to play:</t><t size='0.8'> WarZoneMP is a good way to practice jets, pawnees, tanks or any other skill you need in other gamemodes like KOTH, Invade and Annex and Life.</t><br/><t size='0.8'>Use all of the help sections when you need help using any of this gamemode's features, but the basic aim is to kill your friends, that's it.</t>
-		<br/><br/>
-		<t size='0.8'>There are custom actions bound to the following default keys, however you can edit these keybindings by clicking the 'Edit keybindings' button in the player menu.</t><br/>
-		<t size='0.9' font='PuristaBold'>Default keybindings: </t>
-		<br/><t size='0.9'>Earplugs 				DEFAULT: F1</t>
-		<br/><t size='0.9'>Jump						DEFAULT: Space</t>
-		<br/><t size='0.9'>Open Playermenu 			DEFAULT: Grave(`)</t>";
+<t size='0.9' font='PuristaBold'>How to play:</t><t size='0.8'> WarZoneMP is a good way to practice jets, pawnees, tanks or any other skill you need in other gamemodes like KOTH, Invade and Annex and Life.</t><br/><t size='0.8'>Use all of the help sections when you need help using any of this gamemode's features, but the basic aim is to kill your friends, that's it.</t><br/><br/><t size='0.8'>There are custom actions bound to the following default keys, however you can edit these keybindings by clicking the 'Edit keybindings' button in the player menu.</t>
+<br/><t size='0.9' font='PuristaBold'>Default keybindings: </t>
+<br/><t size='0.9'>Earplugs              DEFAULT: F1</t>
+<br/><t size='0.9'>Jump				     DEFAULT: Space</t>
+<br/><t size='0.9'>Player Menu   	     DEFAULT: Grave(`)</t>
+<br/><t size='0.9'>Enemy AI spawn menu 	 DEFAULT: F2</t>
+<br/><t size='0.9'>Confirm HUD placement DEFAULT: F3</t>";
 		((findDisplay 7546) displayCtrl 1100) ctrlSetStructuredText parseText (format ["<t size='1.2' align='center'> %1 </t>",(_this select 0)]);
 	};
 	case "Edit keybindings help":

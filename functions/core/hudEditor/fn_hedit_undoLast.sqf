@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.08 19.01
+	Last Modified:  2019.03.01 20.40
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -29,7 +29,7 @@ _hedit_ctrls = allControls (uiNamespace getVariable (hedit_lastCtrlPositions sel
 } forEach _hedit_ctrls;
 
 hedit_displayPositions set[(hedit_displays find (hedit_lastCtrlPositions select 1)),(hedit_lastCtrlPositions select 0)];
-profileNamespace setVariable["hedit_displayPositions",hedit_displayPositions];
+profileNamespace setVariable["jp_hedit_displayPositions",hedit_displayPositions];
 
 if (_layerNumber != -1) then {
 	"undoLayer" cutText ["","PLAIN",1];

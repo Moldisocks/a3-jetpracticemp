@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.08 18.19
+	Last Modified:  2019.03.01 20.42
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -11,13 +11,13 @@
 
 */
 
-keys_bindings = profileNamespace getVariable "keys_bindings";
+keys_bindings = profileNamespace getVariable "jp_keys_bindings";
 keys_mainKeyHandlerOn = true;
 if (isNil "keys_bindings") then {// Initialise default keybindings
 	[false] call mld_core_fnc_keys_defaults;
 };
 
-//Debug code:  profileNamespace setVariable ["keys_bindings",nil];
+//Debug code:  profileNamespace setVariable ["jp_keys_bindings",nil];
 
 keys_functions = ["Earplugs","Jump","Player Menu","Enemy AI spawn menu","Confirm HUD placement"];//List of actions that require a custom hardcoded keybinding. Must match indexing of the keyhandler and the var keys_bindings.
 

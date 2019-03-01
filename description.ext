@@ -11,6 +11,9 @@
 
 */
 
+respawn = 3;
+respawnDelay = 5;
+
 author = "Moldisocks";
 onLoadName ="JetPracticeMP";
 onLoadMission = "Multiplayer Jet Practice";

@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.08 18.53
+	Last Modified:  2019.03.01 20.41
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -18,12 +18,12 @@ if (_spawnedFromMenu) then {
 	if (misc_msgboxresult) then {
 		closeDialog 9885;
 		keys_bindings = [59,57,41,60,61];
-		profileNamespace setVariable ["keys_bindings",keys_bindings];
+		profileNamespace setVariable ["jp_keys_bindings",keys_bindings];
 		["keybindings set to default",__FILE__,2] call mld_dbug_fnc_log_add;
 	};
 } else {
 	keys_bindings = [59,57,41,60,61];
-	profileNamespace setVariable ["keys_bindings",keys_bindings];
+	profileNamespace setVariable ["jp_keys_bindings",keys_bindings];
 		["keybindings set to default",__FILE__,2] call mld_dbug_fnc_log_add;
 
 };

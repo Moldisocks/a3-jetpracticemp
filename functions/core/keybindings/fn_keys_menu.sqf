@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.08 18.54
+	Last Modified:  2019.03.01 20.42
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -25,7 +25,7 @@ lbSetCurSel [1500,0];
 (findDisplay 9885) displayAddEventHandler ["Unload",{
 	keys_mainKeyHandlerOn = true;
 	keys_menuLoaded = false;
-	profileNamespace setVariable ["keys_bindings",keys_bindings];
+	profileNamespace setVariable ["jp_keys_bindings",keys_bindings];
 	["keybindings saved successfully",__FILE__,1] call mld_dbug_fnc_log_add;
 
 	}];//Save key bindings when user leaves menu.

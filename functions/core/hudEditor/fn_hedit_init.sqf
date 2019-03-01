@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.09 13.40
+	Last Modified:  2019.03.01 20.39
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -15,7 +15,7 @@
 hedit_displayNames = ["Earplug symbol","Vehicle service progress bar"];
 hedit_displays = ["earplugsSymbol","repProgress"];
 hedit_layers = ["epMute","repairLayer"];
-hedit_displayPositions = profileNamespace getVariable "hedit_displayPositions";
+hedit_displayPositions = profileNamespace getVariable "jp_hedit_displayPositions";
 hedit_hudInitFunctions = {
 	[true,"epMute","earplugsSymbol"] call mld_core_fnc_hedit_createDisplay; //Earplugs
 	[true,"repairLayer","repProgress"] call mld_core_fnc_hedit_createDisplay;

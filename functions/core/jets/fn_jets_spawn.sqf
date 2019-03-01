@@ -108,7 +108,7 @@ _isGroundBound = {
 _jet_classname = jets_classnames select (lbCurSel 1500);
 
 
-closeDialog 895;
+
 
 
 if (_spawn_on_ground) then {
@@ -179,6 +179,7 @@ if (_exitwith_follow_through) exitWith {};
 
 player moveInDriver _jet;
 
-if (!cbChecked ((findDisplay 895) displayCtrl 2802)) then {
+if (!(cbChecked ((findDisplay 895) displayCtrl 2802))) then {
 	[_jet] call mld_core_fnc_jets_arm;
 };
+closeDialog 895;

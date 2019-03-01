@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified:  2019.02.09 02.35
+	Last Modified:  2019.03.01 21.18
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -15,7 +15,7 @@ class playerMenu {
 	idd = 23323;
 	movingEnable =false;
 	class controls {
-			class mainBack: IGUIBack
+		class mainBack: IGUIBack
 		{
 			idc = 2200;
 			x = 0.432948 * safezoneW + safezoneX;
@@ -107,6 +107,15 @@ class playerMenu {
 			h = 0.0210741 * safezoneH;
 			colorBackground[] = {0,0,0,0};
 		};
-
+		class fogButton: RscButton
+		{
+			idc = 1604;
+			text = "Turn off that bastard fog!"; //--- ToDo: Localize;
+			x = 0.45358 * safezoneW + safezoneX;
+			y = 0.258 * safezoneH + safezoneY;
+			w = 0.0979987 * safezoneW;
+			h = 0.022 * safezoneH;
+			action = "0.1 setFog 0;";
+		};
 	};
 };

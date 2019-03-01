@@ -1,6 +1,6 @@
 /*
 	Author: Moldisocks
-	Last Modified: 2019.02.08 18.47
+	Last Modified: 2019.03.01 20.40
 	Email: moldisocks78@gmail.com
 
 	Notes:
@@ -66,7 +66,7 @@ while {!hedit_posSelected} do
 	sleep 0.2;
 };
 hedit_displayPositions set[_lbCurSelection,_hedit_ctrlPositions];
-profileNamespace setVariable["hedit_displayPositions",hedit_displayPositions];
+profileNamespace setVariable["jp_hedit_displayPositions",hedit_displayPositions];
 if (!isNil "hedit_currentDisplay") then {
 	"currentDisplay" cutText ["","PLAIN"];
 	hedit_currentDisplay = nil;
